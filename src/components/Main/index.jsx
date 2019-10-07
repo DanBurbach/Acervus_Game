@@ -15,7 +15,6 @@ class Main extends Component {
       World = Matter.World,
       Bodies = Matter.Bodies,
       Common = Matter.Common,
-      Composites = Matter.Composites,
       Mouse = Matter.Mouse,
       MouseConstraint = Matter.MouseConstraint;
 
@@ -26,7 +25,7 @@ class Main extends Component {
       element: this.refs.scene,
       engine: engine,
       options: {
-        width: 800,
+        width: 1000,
         height: 600,
         wireframes: false
       }
@@ -34,59 +33,63 @@ class Main extends Component {
     Render.run(render);
 
 
-    let ballA = Bodies.circle(210, 100, 30, { restitution: 0.5 });
+    // GENERATED OBJECTS ON LOAD OF PAGE ==========================
 
-    let ballB = Bodies.circle(110, 50, 30, { restitution: 0.5 });
+    // let ballA = Bodies.circle(210, 100, 30, { restitution: 0.5 });
 
-    let obstacles = Composites.stack(10, 75, 15, 3, 10, 10, function(x, y, column ) {
-      var sides = Math.round(Common.random(2, 7)),
-        options = {
-          render: {
-            fillStyle: Common.choose([
-              "#006BA6",
-              "#0496FF",
-              "#D81159",
-              "#8F2D56"
-            ])
-          }
-        };
+    // let ballB = Bodies.circle(110, 50, 30, { restitution: 0.5 });
 
-      switch (Math.round(Common.random(0, 1))) {
-        case 0:
-          if (Common.random() < 0.8) {
-            return Bodies.rectangle(
-              x,
-              y,
-              Common.random(25, 50),
-              Common.random(25, 50),
-              options
-            );
-          } else {
-            return Bodies.rectangle(
-              x,
-              y,
-              Common.random(80, 120),
-              Common.random(25, 30),
-              options
-            );
-          }
-        case 1:
-          return Bodies.polygon(x, y, sides, Common.random(25, 50),
-            options
-          );
-      }
-    });
+    // let obstacles = Composites.stack(10, 75, 15, 3, 10, 10, function(x, y, column ) {
+    //   var sides = Math.round(Common.random(2, 7)),
+    //     options = {
+    //       render: {
+    //         fillStyle: Common.choose([
+    //           "#006BA6",
+    //           "#0496FF",
+    //           "#D81159",
+    //           "#8F2D56"
+    //         ])
+    //       }
+    //     };
+
+    //   switch (Math.round(Common.random(0, 1))) {
+    //     case 0:
+    //       if (Common.random() < 0.8) {
+    //         return Bodies.rectangle(
+    //           x,
+    //           y,
+    //           Common.random(25, 50),
+    //           Common.random(25, 50),
+    //           options
+    //         );
+    //       } else {
+    //         return Bodies.rectangle(
+    //           x,
+    //           y,
+    //           Common.random(80, 120),
+    //           Common.random(25, 30),
+    //           options
+    //         );
+    //       }
+    //     case 1:
+    //       return Bodies.polygon(x, y, sides, Common.random(25, 50),
+    //         options
+    //       );
+    //   }
+    // });
+
+    // World.add(engine.world, [ballA, obstacles, ballB]);
 
 
+// GENERATE FIELD BOX ==================================
     World.add(engine.world, [
       // walls
-      // Bodies.rectangle(200, 0, 600, 50, { isStatic: true }),
-      Bodies.rectangle(200, 600, 600, 50, { isStatic: true }),
-      // Bodies.rectangle(260, 300, 50, 600, { isStatic: true }),
+      Bodies.rectangle(1000, 300, 50, 600, { isStatic: true }),
+      Bodies.rectangle(200, 600, 500, 50, { isStatic: true }),
+      Bodies.rectangle(1000, 600, -800, 50, { isStatic: true }),
       Bodies.rectangle(0, 300, 50, 600, { isStatic: true })
     ]);
 
-    World.add(engine.world, [ballA, obstacles, ballB]);
 
     // add mouse control
     var mouse = Mouse.create(render.canvas),
@@ -102,16 +105,37 @@ class Main extends Component {
 
     World.add(engine.world, mouseConstraint);
 
+// click to generate item layouts------------
+    // let rectangles = (engine.world,
+    //         Bodies.rectangle(90, 50, Common.random(10, 70), Common.random(12, 90), {
+    //           restitution: 0.5
+    //         }));
+
+    // let circles = (engine.world,(
+    //         Bodies.circle(90, 30, Common.random(20), { restitution: 0.9 })));
+
+    // let polygons = (engine.world,
+    //         Bodies.polygon(90, 30, Common.random(7), Common.random(45), {
+    //           restitution: 0.7
+    //         }));
+
     Matter.Events.on(mouseConstraint, "mousedown", function(event) {
-      World.add(engine.world, Bodies.rectangle(90, 50, Common.random(5,70), Common.random(6,90), { restitution: 0.7 }));
-      // World.add(engine.world, Bodies.circle(90, 30, 30, { restitution: 0.7 }));
-    });
+      World.add(engine.world, Bodies.rectangle(90, 50, Common.random(10,70), Common.random(12,90), { restitution: 0.5 }));
+
+      World.add(engine.world, Bodies.circle(90, 30, Common.random(20), { restitution: 0.9 }));
+
+      World.add(engine.world, Bodies.polygon(90, 30, Common.random(7), Common.random(45), { restitution: 0.7 }))
+  });
 
     Engine.run(engine);
   }
 
   render() {
-    return <div ref="scene" />;
-  }
+    return (
+    <div className="main_container">
+      <div ref="scene" />
+      <button>Add More Items</button>
+    </div>
+  )};
 }
 export default Main;
