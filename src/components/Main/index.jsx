@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import Matter from 'matter-js';
+import Matter from "matter-js";
 
 import "./../../assets/Main.css";
-
 
 class Main extends Component {
   constructor(props) {
@@ -34,12 +33,12 @@ class Main extends Component {
 
     var ballA = Bodies.circle(210, 100, 30, { restitution: 0.5 });
     var ballB = Bodies.circle(110, 50, 30, { restitution: 0.5 });
-    
+
     World.add(engine.world, [
       // walls
-      Bodies.rectangle(200, 0, 600, 50, { isStatic: true }),
+      // Bodies.rectangle(200, 0, 600, 50, { isStatic: true }),
       Bodies.rectangle(200, 600, 600, 50, { isStatic: true }),
-      Bodies.rectangle(260, 300, 50, 600, { isStatic: true }),
+      // Bodies.rectangle(260, 300, 50, 600, { isStatic: true }),
       Bodies.rectangle(0, 300, 50, 600, { isStatic: true })
     ]);
 
