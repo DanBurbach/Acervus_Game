@@ -10,29 +10,73 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    var Engine = Matter.Engine,
+    const Engine = Matter.Engine,
       Render = Matter.Render,
       World = Matter.World,
       Bodies = Matter.Bodies,
+      Common = Matter.Common,
+      Composites = Matter.Composites,
       Mouse = Matter.Mouse,
       MouseConstraint = Matter.MouseConstraint;
 
-    var engine = Engine.create({
-      // positionIterations: 20
-    });
+    const engine = Engine.create();
+        // world = engine.world;
 
-    var render = Render.create({
+    const render = Render.create({
       element: this.refs.scene,
       engine: engine,
       options: {
-        width: 600,
+        width: 800,
         height: 600,
         wireframes: false
       }
     });
+    Render.run(render);
 
-    var ballA = Bodies.circle(210, 100, 30, { restitution: 0.5 });
-    var ballB = Bodies.circle(110, 50, 30, { restitution: 0.5 });
+
+    let ballA = Bodies.circle(210, 100, 30, { restitution: 0.5 });
+
+    let ballB = Bodies.circle(110, 50, 30, { restitution: 0.5 });
+
+    let obstacles = Composites.stack(10, 75, 15, 3, 10, 10, function(x, y, column ) {
+      var sides = Math.round(Common.random(2, 7)),
+        options = {
+          render: {
+            fillStyle: Common.choose([
+              "#006BA6",
+              "#0496FF",
+              "#D81159",
+              "#8F2D56"
+            ])
+          }
+        };
+
+      switch (Math.round(Common.random(0, 1))) {
+        case 0:
+          if (Common.random() < 0.8) {
+            return Bodies.rectangle(
+              x,
+              y,
+              Common.random(25, 50),
+              Common.random(25, 50),
+              options
+            );
+          } else {
+            return Bodies.rectangle(
+              x,
+              y,
+              Common.random(80, 120),
+              Common.random(25, 30),
+              options
+            );
+          }
+        case 1:
+          return Bodies.polygon(x, y, sides, Common.random(25, 50),
+            options
+          );
+      }
+    });
+
 
     World.add(engine.world, [
       // walls
@@ -42,7 +86,7 @@ class Main extends Component {
       Bodies.rectangle(0, 300, 50, 600, { isStatic: true })
     ]);
 
-    World.add(engine.world, [ballA, ballB]);
+    World.add(engine.world, [ballA, obstacles, ballB]);
 
     // add mouse control
     var mouse = Mouse.create(render.canvas),
@@ -59,12 +103,11 @@ class Main extends Component {
     World.add(engine.world, mouseConstraint);
 
     Matter.Events.on(mouseConstraint, "mousedown", function(event) {
-      World.add(engine.world, Bodies.circle(150, 50, 30, { restitution: 0.7 }));
+      World.add(engine.world, Bodies.rectangle(90, 50, Common.random(5,70), Common.random(6,90), { restitution: 0.7 }));
+      // World.add(engine.world, Bodies.circle(90, 30, 30, { restitution: 0.7 }));
     });
 
     Engine.run(engine);
-
-    Render.run(render);
   }
 
   render() {
