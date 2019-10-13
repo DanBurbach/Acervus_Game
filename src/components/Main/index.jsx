@@ -1,10 +1,13 @@
 import React, { Component } from "react";
-import Matter, {Engine, Render, World, Bodies, Common, Mouse, MouseConstraint} from "matter-js";
-import $ from 'jquery';
+import Matter, {Engine, Render, World, Bodies} from "matter-js";
+
+import createRender from './createRender';
+import Drag from './mouse';
+import Circle from './circle';
+import Rectangle from './rectangle';
+import Polygon from './polygon'
 
 import "./../../assets/Main.css";
-
-// const engine = Engine.create();
 
 class Main extends Component {
   constructor(props) {
@@ -12,146 +15,136 @@ class Main extends Component {
     this.state = {
       world: World,
       bodies: Bodies,
-      engine: Engine.create(),
-        renderer: Render.create({
-          element: this.refs.scene,
-          engine: this.engine,
-          options: {
-            width: 1000,
-            height: 600,
-            wireframes: false
-            }
-          }),
+      engine: Matter.Engine.create(),
       score: 0,
       play_game: false
     };
+    this.canvasSetUp = this.canvasSetUp.bind(this);
+    this.gameSetUp = this.gameSetUp.bind(this);
+    this.gameContainer = this.gameContainer.bind(this);
   }
-
 
   componentDidMount() {
-      if (window.confirm("You want to start game?")) {   
-          this.setState({play_game: true}, () => {
-            console.log(this.state.play_game);
-          });
-          this.buildWorld();
-          this.startGame();
-          this.setupWorld();
-      }
-    }
-
-    buildWorld = (canvas) => {
-      World.add(this.state.engine.world, [
-        Bodies.rectangle(1000, 300, 50, 600, { isStatic: true }),
-        Bodies.rectangle(200, 600, 500, 50, { isStatic: true }),
-        Bodies.rectangle(1000, 600, -800, 50, { isStatic: true }),
-        Bodies.rectangle(0, 300, 50, 600, { isStatic: true })
-      ]);
-    }
-
-  startGame = (canvas) => {
-    // let canvas = document.getElementById("canvas");
-
-    let renderMatter = createRender(canvas, this.engine);
-    this.run(renderMatter);
-
-      window.addEventListener("resize", function () {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    this.run(renderMatter);
-  });
-}
-
-  setupWorld(canvas) {
-    let rndomNumber = Math.floor(Math.random() * 3) + 1;
-
-    let mouse = Mouse.create(this.renderer.canvas),
-      mouseConstraint = MouseConstraint.create(this.engine, {
-        mouse: mouse,
-        rndomNumber: rndomNumber,
-        constraint: {
-          stiffness: 0.2,
-          render: {
-            visible: false
-          }
-        }
+    if (window.confirm("You want to start game?")) {
+      this.setState({ play_game: true }, () => {
+        console.log(this.state.play_game);
       });
-    World.add(this.engine.world, mouseConstraint);
+      let canvas = document.getElementById("canvas");
+      this.canvasSetUp(canvas);
+      this.gameSetUp(canvas);
+      let renderer = createRender(canvas, this.state.engine);
+      Engine.run(this.state.engine);
+      Render.run(renderer);
 
-    // GENERATE FIELD BOX ==================================
-    // World.add(this.engine.world, [
-    //   Bodies.rectangle(1000, 300, 50, 600, { isStatic: true }),
-    //   Bodies.rectangle(200, 600, 500, 50, { isStatic: true }),
-    //   Bodies.rectangle(1000, 600, -800, 50, { isStatic: true }),
-    //   Bodies.rectangle(0, 300, 50, 600, { isStatic: true })
-    // ]);
-
-
-
-    let addCircle = function() {
-      let circle = Bodies.circle(90, 30, Common.random(20), {
-        restitution: 0.9
+      window.addEventListener("resize", function() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        Render.run(renderer);
       });
-      return circle;
-    };
-
-    let addRectangle = function() {
-      let rectangle = Bodies.rectangle(
-        90,
-        50,
-        Common.random(10, 70),
-        Common.random(12, 90),
-        { restitution: 0.5 }
-      );
-      return rectangle;
-    };
-
-    let addPolygon = function() {
-      let polygon = Bodies.polygon(
-        90,
-        30,
-        Common.random(7),
-        Common.random(45),
-        { restitution: 0.7 }
-      );
-      return polygon;
-    };
-
-    $(".add-circle").on("click", function() {
-      World.add(this.engine.world, addCircle());
-    });
-
-    $(".add-rectangle").on("click", function() {
-      World.add(this.engine.world, addRectangle());
-    });
-
-    $(".add-polygon").on("click", function() {
-      World.add(this.engine.world, addPolygon());
-    });
-
-    Engine.run(this.engine);
+    } else {
+      return null;
+    }
   }
 
-  // addAPolygon = (event) => {
-  //   event.preventDefault();
-  //   World.add(engine.world, addPolygon());
-  //   let addPolygon = Bodies.polygon(90, 30, Common.random(7), Common.random(45), {
-  //     restitution: 0.7
-  //   });
-  // }
+  canvasSetUp = canvas => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  };
+
+  gameSetUp = canvas => {
+    this.gameContainer(canvas);
+    var dragConstraint = Drag(canvas, this.state.engine);
+    Matter.World.add(this.state.engine.world, [dragConstraint]);
+  };
+
+  gameContainer = canvas => {
+    let containerW = canvas.width * 1.85;
+    let containerH = canvas.height * 1.75;
+
+    World.add(this.state.engine.world, [
+      Bodies.rectangle(
+        0,
+        0,
+        containerW,
+        20, //Top
+        { isStatic: true }
+      ),
+      Bodies.rectangle(
+        0,
+        0,
+        20,
+        containerH, //Left
+        { isStatic: true }
+      ),
+      Bodies.rectangle(
+        900,
+        0,
+        20,
+        containerH, //Right
+        { isStatic: true }
+      ),
+      Bodies.rectangle(0, 600, 750, 30, { isStatic: true }), //Bottom Left
+      Bodies.rectangle(
+        900,
+        600,
+        700,
+        30, //Bottom Right
+        { isStatic: true }
+      )
+    ]);
+  };
+
+  addObject = () => {
+    let rndomNumber = Math.floor(Math.random() * 3) + 1;
+    let circle = new Circle(90, 20);
+    let rectangle = new Rectangle(90, 20);
+    let polygon = new Polygon(90, 20);
+
+    if (rndomNumber === 1) {
+      Matter.World.add(this.state.engine.world, [circle]);
+    } else if (rndomNumber === 2) {
+      Matter.World.add(this.state.engine.world, [polygon]);
+    } else if (rndomNumber === 3) {
+      Matter.World.add(this.state.engine.world, [rectangle]);
+    }
+  };
+
+  addCircle = () => {
+    let circle = new Circle(90, 20);
+    Matter.World.add(this.state.engine.world, [circle]);
+  };
+
+  addRectangle = () => {
+    let rectangle = new Rectangle(90, 20);
+      Matter.World.add(this.state.engine.world, [rectangle]);
+  };
+
+  addPolygon = () => {
+    let polygon = new Polygon(90, 20);
+      Matter.World.add(this.state.engine.world, [polygon]);
+  };
 
   render() {
     return (
       <div className="main_container">
         <div ref="scene" />
         <canvas id="canvas" className="canvas"></canvas>
-        <button className="add-circle">Add Circle</button>
-        <button className="add-rectangle">Add Rectangle</button>
-        <button className="add-polygon">Add Polygon</button>
-        {/* <button className="add-polygon" onClick={this.addAPolygon}>
+        <button className="add-circle" onClick={this.addCircle}>
+          Add Circle
+        </button>
+        <button className="add-rectangle" onClick={this.addRectangle}>
+          Add Rectangle
+        </button>
+        <button className="add-polygon" onClick={this.addPolygon}>
           Add Polygon
-        </button> */}
+        </button>
+        <button className="add-object" onClick={this.addObject}>
+          Add Random Object
+        </button>
       </div>
     );
   }
 }
+
+
 export default Main;
