@@ -33,6 +33,7 @@ class Main extends Component {
       this.canvasSetUp(canvas);
       this.gameSetUp(canvas);
       let renderer = createRender(canvas, this.state.engine);
+
       Engine.run(this.state.engine);
       Render.run(renderer);
 
@@ -85,66 +86,90 @@ class Main extends Component {
       ),
       Bodies.rectangle(0, 600, 750, 30, { isStatic: true }), //Bottom Left
       Bodies.rectangle(
-        900,
-        600,
         700,
+        600,
+        400,
         30, //Bottom Right
         { isStatic: true }
       )
     ]);
   };
 
+  outOfBounds = () => {
+    World.remove(this.world, this.bodies);
+  };
+
   addObject = () => {
     let rndomNumber = Math.floor(Math.random() * 3) + 1;
-    let circle = new Circle(90, 20);
-    let rectangle = new Rectangle(90, 20);
-    let polygon = new Polygon(90, 20);
-
     if (rndomNumber === 1) {
-      Matter.World.add(this.state.engine.world, [circle]);
+      this.addCircle();
     } else if (rndomNumber === 2) {
-      Matter.World.add(this.state.engine.world, [polygon]);
+      this.addPolygon();
     } else if (rndomNumber === 3) {
-      Matter.World.add(this.state.engine.world, [rectangle]);
+      this.addRectangle();
     }
   };
 
-  addCircle = () => {
+  addCircle = (canvas) => {
     let circle = new Circle(90, 20);
     Matter.World.add(this.state.engine.world, [circle]);
+    let circPosition = circle.position;
+    console.log(circPosition);
+
+    if (circPosition.y > canvas.height + 100) {
+      this.outOfBounds();
+      console.log('removed from screen');
+      
+    }
   };
 
   addRectangle = () => {
     let rectangle = new Rectangle(90, 20);
-      Matter.World.add(this.state.engine.world, [rectangle]);
+    Matter.World.add(this.state.engine.world, [rectangle]);
+    let rectPosition = rectangle.position;
+    console.log(rectPosition);
   };
 
   addPolygon = () => {
     let polygon = new Polygon(90, 20);
-      Matter.World.add(this.state.engine.world, [polygon]);
+    Matter.World.add(this.state.engine.world, [polygon]);
+    let polyPosition = polygon.position;
+    console.log(polyPosition);
   };
 
   render() {
     return (
       <div className="main_container">
-        <div ref="scene" />
-        <canvas id="canvas" className="canvas"></canvas>
-        <button className="add-circle" onClick={this.addCircle}>
-          Add Circle
-        </button>
-        <button className="add-rectangle" onClick={this.addRectangle}>
-          Add Rectangle
-        </button>
-        <button className="add-polygon" onClick={this.addPolygon}>
-          Add Polygon
-        </button>
-        <button className="add-object" onClick={this.addObject}>
-          Add Random Object
-        </button>
+        <div className="main_component">
+          <canvas id="canvas" className="canvas"></canvas>
+        </div>
+        <div className="main_component">
+          <ul>
+            <ol>
+              <button className="add-circle" onClick={this.addCircle}>
+                Add Circle
+              </button>
+            </ol>
+            <ol>
+              <button className="add-rectangle" onClick={this.addRectangle}>
+                Add Rectangle
+              </button>
+            </ol>
+            <ol>
+              <button className="add-polygon" onClick={this.addPolygon}>
+                Add Polygon
+              </button>
+            </ol>
+            <ol>
+              <button className="add-object" onClick={this.addObject}>
+                Add Random Object
+              </button>
+            </ol>
+          </ul>
+        </div>
       </div>
     );
   }
 }
-
 
 export default Main;
