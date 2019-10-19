@@ -1,7 +1,11 @@
 import Matter, { Common } from "matter-js";
 
-export default function circle(x, y) {
-  this.body = Matter.Bodies.circle(90, 30, Common.random(20), {
+export default function circle() {
+  let x = 30;
+  let y = 30;
+  let r = Common.random(30);
+  this.body = Matter.Bodies.circle(x, y, r, {
+    friction: 0.1,
     restitution: 0.9
   });
   return this.body;

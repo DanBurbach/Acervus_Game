@@ -22,6 +22,7 @@ class Main extends Component {
     this.canvasSetUp = this.canvasSetUp.bind(this);
     this.gameSetUp = this.gameSetUp.bind(this);
     this.gameContainer = this.gameContainer.bind(this);
+    this.gameBodiesRemover = this.gameBodiesRemover.bind(this);
   }
 
   componentDidMount() {
@@ -54,12 +55,13 @@ class Main extends Component {
 
   gameSetUp = canvas => {
     this.gameContainer(canvas);
+    this.gameBodiesRemover(canvas);
     var dragConstraint = Drag(canvas, this.state.engine);
     Matter.World.add(this.state.engine.world, [dragConstraint]);
   };
 
   gameContainer = canvas => {
-    let containerW = canvas.width * 1.85;
+    let containerW = canvas.width * 1.75;
     let containerH = canvas.height * 1.75;
 
     World.add(this.state.engine.world, [
@@ -95,8 +97,35 @@ class Main extends Component {
     ]);
   };
 
-  outOfBounds = () => {
-    World.remove(this.world, this.bodies);
+  gameBodiesRemover = canvas => {
+    World.add(world, [
+      collider,
+      collider,
+      Bodies.rectangle(435, 605, 145, 30, {
+        isSensor: true,
+        isStatic: true,
+        render: {
+          fillStyle: "transparent",
+          strokeStyle: "red",
+          lineWidth: 2
+        }
+      })
+    ]);
+  };
+
+  outOfBounds = event => {
+    var pairs = event.pairs;
+    for (var i = 0, j = pairs.length; i != j; ++i) {
+      var pair = pairs[i];
+
+      if (pair.bodyA === collider) {
+        pair.bodyB.render.strokeStyle = console.log("removed from screen");
+        World.remove(this.world, this.bodies);
+      } else if (pair.bodyB === collider) {
+        pair.bodyA.render.strokeStyle = console.log("removed from screen");
+        World.remove(this.world, this.bodies);
+      }
+    }
   };
 
   addObject = () => {
@@ -110,17 +139,18 @@ class Main extends Component {
     }
   };
 
-  addCircle = (canvas) => {
-    let circle = new Circle(90, 20);
+  addCircle = () => {
+    let circle = new Circle();
     Matter.World.add(this.state.engine.world, [circle]);
-    let circPosition = circle.position;
-    console.log(circPosition);
+    // let circPosition = circle.position;
+    // console.log(this.state.engine.world);
+    // console.log(circle);
+    // console.log(circPosition);
+    // console.log(window.innerHeight);
 
-    if (circPosition.y > canvas.height + 100) {
-      this.outOfBounds();
-      console.log('removed from screen');
-      
-    }
+    // if (circPosition.y  > ((window.innerHeight * 1.75) + 200)) {
+    //   console.log('removed from screen');
+    // }
   };
 
   addRectangle = () => {
