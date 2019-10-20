@@ -1,6 +1,6 @@
 import Matter, { Common } from "matter-js";
 
-export default function circle() {
+export default function Circle() {
   let x = 30;
   let y = 30;
   let r = Common.random(30);

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Matter, {Engine, Render, World, Bodies} from "matter-js";
+import Matter, {Engine, Render, World, Bodies, Events} from "matter-js";
 
 import createRender from './createRender';
 import Drag from './mouse';
@@ -22,7 +22,7 @@ class Main extends Component {
     this.canvasSetUp = this.canvasSetUp.bind(this);
     this.gameSetUp = this.gameSetUp.bind(this);
     this.gameContainer = this.gameContainer.bind(this);
-    this.gameBodiesRemover = this.gameBodiesRemover.bind(this);
+    // this.gameBodiesRemover = this.gameBodiesRemover.bind(this);
   }
 
   componentDidMount() {
@@ -64,7 +64,7 @@ class Main extends Component {
     let containerW = canvas.width * 1.75;
     let containerH = canvas.height * 1.75;
 
-    World.add(this.state.engine.world, [
+    World.add(this.state.engine.world, [ 
       Bodies.rectangle(
         0,
         0,
@@ -93,39 +93,68 @@ class Main extends Component {
         400,
         30, //Bottom Right
         { isStatic: true }
-      )
+      ),
     ]);
   };
 
-  gameBodiesRemover = canvas => {
-    World.add(world, [
-      collider,
-      collider,
-      Bodies.rectangle(435, 605, 145, 30, {
-        isSensor: true,
-        isStatic: true,
-        render: {
-          fillStyle: "transparent",
-          strokeStyle: "red",
-          lineWidth: 2
+  gameBodiesRemover = () => {
+      World.add(this.state.engine.world, [
+        Bodies.rectangle(435, 605, 145, 30, {
+          isSensor: true,
+          isStatic: true,
+          render: {
+            fillStyle: "transparent",
+            strokeStyle: "red",
+            lineWidth: 2
+          }
+        })
+      ]);
+
+      let collider = World.add(this.state.engine.world, [
+        Bodies.rectangle(435, 605, 145, 30, {
+          isSensor: true,
+          isStatic: true,
+          render: {
+            fillStyle: "transparent",
+            strokeStyle: "red",
+            lineWidth: 2
+          }
+        })
+      ]);
+
+      Events.on(this.state.engine, "collisionStart", function(event) {
+        var pairs = event.pairs;
+
+        for (var i = 0, j = pairs.length; i !== j; ++i) {
+          var pair = pairs[i];
+
+          if (pair.bodyA === collider) {
+            console.log("green?");
+            pair.bodyB.render.strokeStyle = "green";
+          } else if (pair.bodyB === collider) {
+            console.log("still green?");
+            pair.bodyA.render.strokeStyle = "green";
+          }
         }
-      })
-    ]);
-  };
+      });
 
-  outOfBounds = event => {
-    var pairs = event.pairs;
-    for (var i = 0, j = pairs.length; i != j; ++i) {
-      var pair = pairs[i];
+      Events.on(this.state.engine, "collisionEnd", function(event) {
+        var pairs = event.pairs;
 
-      if (pair.bodyA === collider) {
-        pair.bodyB.render.strokeStyle = console.log("removed from screen");
-        World.remove(this.world, this.bodies);
-      } else if (pair.bodyB === collider) {
-        pair.bodyA.render.strokeStyle = console.log("removed from screen");
-        World.remove(this.world, this.bodies);
-      }
-    }
+        for (var i = 0, j = pairs.length; i !== j; ++i) {
+          var pair = pairs[i];
+
+          if (pair.bodyA === collider) {
+            console.log("red?");
+            pair.bodyB.render.strokeStyle = "red";
+          } else if (pair.bodyB === collider) {
+            console.log("still red?");
+            pair.bodyA.render.strokeStyle = "red";
+          }
+        }
+      });
+
+    // World.remove(this.world, this.bodies);
   };
 
   addObject = () => {
@@ -142,15 +171,8 @@ class Main extends Component {
   addCircle = () => {
     let circle = new Circle();
     Matter.World.add(this.state.engine.world, [circle]);
-    // let circPosition = circle.position;
-    // console.log(this.state.engine.world);
-    // console.log(circle);
-    // console.log(circPosition);
-    // console.log(window.innerHeight);
-
-    // if (circPosition.y  > ((window.innerHeight * 1.75) + 200)) {
-    //   console.log('removed from screen');
-    // }
+    let circPosition = circle.position;
+    console.log(circPosition);
   };
 
   addRectangle = () => {
