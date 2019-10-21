@@ -9,6 +9,7 @@ import Polygon from './polygon'
 
 import "./../../assets/Main.css";
 
+
 class Main extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +23,7 @@ class Main extends Component {
     this.canvasSetUp = this.canvasSetUp.bind(this);
     this.gameSetUp = this.gameSetUp.bind(this);
     this.gameContainer = this.gameContainer.bind(this);
-    // this.gameBodiesRemover = this.gameBodiesRemover.bind(this);
+    this.gameBodiesRemover = this.gameBodiesRemover.bind(this);
   }
 
   componentDidMount() {
@@ -98,61 +99,51 @@ class Main extends Component {
   };
 
   gameBodiesRemover = () => {
-      World.add(this.state.engine.world, [
-        Bodies.rectangle(435, 605, 145, 30, {
-          isSensor: true,
-          isStatic: true,
-          render: {
-            fillStyle: "transparent",
-            strokeStyle: "red",
-            lineWidth: 2
-          }
-        })
-      ]);
-
-      let collider = World.add(this.state.engine.world, [
-        Bodies.rectangle(435, 605, 145, 30, {
-          isSensor: true,
-          isStatic: true,
-          render: {
-            fillStyle: "transparent",
-            strokeStyle: "red",
-            lineWidth: 2
-          }
-        })
-      ]);
-
-      Events.on(this.state.engine, "collisionStart", function(event) {
-        var pairs = event.pairs;
-
-        for (var i = 0, j = pairs.length; i !== j; ++i) {
-          var pair = pairs[i];
-
-          if (pair.bodyA === collider) {
-            console.log("green?");
-            pair.bodyB.render.strokeStyle = "green";
-          } else if (pair.bodyB === collider) {
-            console.log("still green?");
-            pair.bodyA.render.strokeStyle = "green";
-          }
+    const collider = 
+      Bodies.rectangle(435, 605, 145, 30, {
+        isSensor: true,
+        isStatic: true,
+        render: {
+          fillStyle: "transparent",
+          strokeStyle: "red",
+          lineWidth: 2
         }
       });
 
-      Events.on(this.state.engine, "collisionEnd", function(event) {
-        var pairs = event.pairs;
+    World.add(this.state.engine.world, [collider]);
 
-        for (var i = 0, j = pairs.length; i !== j; ++i) {
-          var pair = pairs[i];
 
-          if (pair.bodyA === collider) {
-            console.log("red?");
-            pair.bodyB.render.strokeStyle = "red";
-          } else if (pair.bodyB === collider) {
-            console.log("still red?");
-            pair.bodyA.render.strokeStyle = "red";
-          }
+    Events.on(this.state.engine, "collisionStart", function(event) {
+      var pairs = event.pairs;
+
+      for (var i = 0, j = pairs.length; i !== j; ++i) {
+        var pair = pairs[i];
+
+        if (pair.bodyA === collider) {
+          console.log("green?");
+          pair.bodyB.render.strokeStyle = "green";
+        } else if (pair.bodyB === collider) {
+          console.log("still green?");
+          pair.bodyA.render.strokeStyle = "green";
         }
-      });
+      }
+    });
+
+    Events.on(this.state.engine, "collisionEnd", function(event) {
+      var pairs = event.pairs;
+
+      for (var i = 0, j = pairs.length; i !== j; ++i) {
+        var pair = pairs[i];
+
+        if (pair.bodyA === collider) {
+          console.log("red?");
+          pair.bodyB.render.strokeStyle = "red";
+        } else if (pair.bodyB === collider) {
+          console.log("still red?");
+          pair.bodyA.render.strokeStyle = "red";
+        }
+      }
+    });
 
     // World.remove(this.world, this.bodies);
   };
