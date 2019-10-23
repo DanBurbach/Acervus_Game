@@ -66,33 +66,43 @@ class Main extends Component {
     let containerH = canvas.height * 1.75;
 
     World.add(this.state.engine.world, [ 
+      //Top
       Bodies.rectangle(
         0,
         0,
         containerW,
-        20, //Top
+        20,
         { isStatic: true }
       ),
+      //Left Wall
       Bodies.rectangle(
         0,
         0,
         20,
-        containerH, //Left
+        containerH,
         { isStatic: true }
       ),
+      //Right Wall
       Bodies.rectangle(
         900,
         0,
         20,
-        containerH, //Right
+        containerH,
         { isStatic: true }
       ),
-      Bodies.rectangle(0, 600, 750, 30, { isStatic: true }), //Bottom Left
+      //Bottom Left Floor
+      Bodies.rectangle(
+        0, 
+        600, 
+        750, 
+        30, 
+        { isStatic: true }), 
+      //Bottom Right Floor
       Bodies.rectangle(
         700,
         600,
         400,
-        30, //Bottom Right
+        30,
         { isStatic: true }
       ),
     ]);
@@ -100,7 +110,9 @@ class Main extends Component {
 
   gameBodiesRemover = () => {
     const collider = 
-      Bodies.rectangle(435, 605, 145, 30, {
+      Bodies.rectangle(435, 620
+        , 145
+        , 30, {
         isSensor: true,
         isStatic: true,
         render: {
@@ -135,8 +147,10 @@ class Main extends Component {
       for (var i = 0, j = pairs.length; i !== j; ++i) {
         var pair = pairs[i];
 
+        //if collision passes object through floor rectangle it removes it from the world
         if (pair.bodyA === collider) {
           console.log("red?");
+          World.remove(this.world, pair.bodyB);
           pair.bodyB.render.strokeStyle = "red";
         } else if (pair.bodyB === collider) {
           console.log("still red?");
