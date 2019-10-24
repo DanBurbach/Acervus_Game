@@ -30,6 +30,7 @@ class Main extends Component {
     if (window.confirm("You want to start game?")) {
       this.setState({ play_game: true }, () => {
         console.log(this.state.play_game);
+        console.log(this.state.score);
       });
       let canvas = document.getElementById("canvas");
       this.canvasSetUp(canvas);
@@ -65,65 +66,35 @@ class Main extends Component {
     let containerW = canvas.width * 1.75;
     let containerH = canvas.height * 1.75;
 
-    World.add(this.state.engine.world, [ 
+    World.add(this.state.engine.world, [
       //Top
-      Bodies.rectangle(
-        0,
-        0,
-        containerW,
-        20,
-        { isStatic: true }
-      ),
+      Bodies.rectangle(0, 0, containerW, 20, { isStatic: true }),
       //Left Wall
-      Bodies.rectangle(
-        0,
-        0,
-        20,
-        containerH,
-        { isStatic: true }
-      ),
+      Bodies.rectangle(0, 0, 20, containerH, { isStatic: true }),
       //Right Wall
-      Bodies.rectangle(
-        900,
-        0,
-        20,
-        containerH,
-        { isStatic: true }
-      ),
+      Bodies.rectangle(900, 0, 20, containerH, { isStatic: true }),
       //Bottom Left Floor
-      Bodies.rectangle(
-        0, 
-        600, 
-        750, 
-        30, 
-        { isStatic: true }), 
-      //Bottom Right Floor
-      Bodies.rectangle(
-        700,
-        600,
-        400,
-        30,
-        { isStatic: true }
-      ),
+      Bodies.rectangle(0, 600, 600, 30, { isStatic: true }),
+      //Platform
+      Bodies.rectangle(600, 500, 80, 15, { isStatic: true }),
+      //Holder wall
+      Bodies.rectangle(300, 400, 15, 425, { isStatic: true })
     ]);
   };
 
   gameBodiesRemover = () => {
-    const collider = 
-      Bodies.rectangle(435, 620
-        , 145
-        , 30, {
-        isSensor: true,
-        isStatic: true,
-        render: {
-          fillStyle: "transparent",
-          strokeStyle: "red",
-          lineWidth: 2
-        }
-      });
+    //deletion boundary rectangle
+    const collider = Bodies.rectangle(600, 650, 1600, 10, {
+      isSensor: true,
+      isStatic: true,
+      render: {
+        fillStyle: "transparent",
+        strokeStyle: "red",
+        lineWidth: 2
+      }
+    });
 
     World.add(this.state.engine.world, [collider]);
-
 
     Events.on(this.state.engine, "collisionStart", function(event) {
       var pairs = event.pairs;
@@ -132,10 +103,8 @@ class Main extends Component {
         var pair = pairs[i];
 
         if (pair.bodyA === collider) {
-          console.log("green?");
           pair.bodyB.render.strokeStyle = "green";
         } else if (pair.bodyB === collider) {
-          console.log("still green?");
           pair.bodyA.render.strokeStyle = "green";
         }
       }
@@ -144,22 +113,21 @@ class Main extends Component {
     Events.on(this.state.engine, "collisionEnd", function(event) {
       var pairs = event.pairs;
 
+
       for (var i = 0, j = pairs.length; i !== j; ++i) {
         var pair = pairs[i];
-
         //if collision passes object through floor rectangle it removes it from the world
         if (pair.bodyA === collider) {
-          console.log("red?");
+          this.setState({ score: this.state.score - 150 }, () => {
+            console.log(this.state.score);
+          });
           World.remove(this.world, pair.bodyB);
-          pair.bodyB.render.strokeStyle = "red";
+          pair.bodyA.render.strokeStyle = "red";
         } else if (pair.bodyB === collider) {
-          console.log("still red?");
           pair.bodyA.render.strokeStyle = "red";
         }
       }
     });
-
-    // World.remove(this.world, this.bodies);
   };
 
   addObject = () => {
@@ -176,23 +144,30 @@ class Main extends Component {
   addCircle = () => {
     let circle = new Circle();
     Matter.World.add(this.state.engine.world, [circle]);
-    let circPosition = circle.position;
-    console.log(circPosition);
+    this.setState({ score: this.state.score + 100 }, () => {
+      console.log(this.state.score);
+    });
   };
 
   addRectangle = () => {
     let rectangle = new Rectangle(90, 20);
     Matter.World.add(this.state.engine.world, [rectangle]);
-    let rectPosition = rectangle.position;
-    console.log(rectPosition);
+    this.setState({ score: this.state.score + 20 }, () => {
+      console.log(this.state.score);
+    });
   };
 
   addPolygon = () => {
     let polygon = new Polygon(90, 20);
     Matter.World.add(this.state.engine.world, [polygon]);
-    let polyPosition = polygon.position;
-    console.log(polyPosition);
+    this.setState({ score: this.state.score + 50 }, () => {
+      console.log(this.state.score);
+    });
   };
+
+  // decreaseScore = () => {
+  //   this.setState({ score: this.state.score - 150 });
+  // };
 
   render() {
     return (
@@ -202,6 +177,11 @@ class Main extends Component {
         </div>
         <div className="main_component">
           <ul>
+            <ol>
+              <div id='userScore'>
+                Score: {this.state.score}
+              </div>
+            </ol>
             <ol>
               <button className="add-circle" onClick={this.addCircle}>
                 Add Circle
