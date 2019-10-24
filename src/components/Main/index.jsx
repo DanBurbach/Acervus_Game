@@ -24,6 +24,7 @@ class Main extends Component {
     this.gameSetUp = this.gameSetUp.bind(this);
     this.gameContainer = this.gameContainer.bind(this);
     this.gameBodiesRemover = this.gameBodiesRemover.bind(this);
+    this.decreaseScore = this.decreaseScore.bind(this);
   }
 
   componentDidMount() {
@@ -84,6 +85,12 @@ class Main extends Component {
 
   gameBodiesRemover = () => {
     //deletion boundary rectangle
+    let decreaseScore = function() {
+      this.setState({ score: this.state.score - 150 }, () => {
+        console.log(this.state.score);
+      });
+    };
+
     const collider = Bodies.rectangle(600, 650, 1600, 10, {
       isSensor: true,
       isStatic: true,
@@ -96,38 +103,34 @@ class Main extends Component {
 
     World.add(this.state.engine.world, [collider]);
 
-    Events.on(this.state.engine, "collisionStart", function(event) {
-      var pairs = event.pairs;
+    // let touchingOutOfBounds = (Events.on(this.state.engine, "collisionStart", function(event) {
+    //   var pairs = event.pairs;
 
-      for (var i = 0, j = pairs.length; i !== j; ++i) {
-        var pair = pairs[i];
+    //   for (var i = 0, j = pairs.length; i !== j; ++i) {
+    //     var pair = pairs[i];
 
-        if (pair.bodyA === collider) {
-          pair.bodyB.render.strokeStyle = "green";
-        } else if (pair.bodyB === collider) {
-          pair.bodyA.render.strokeStyle = "green";
-        }
-      }
-    });
+    //     if (pair.bodyA === collider) {
+    //       pair.bodyB.render.strokeStyle = "green";
+    //     } else if (pair.bodyB === collider) {
+    //       pair.bodyA.render.strokeStyle = "green";
+    //     }
+    //   }}
+    // )) === true;
 
     Events.on(this.state.engine, "collisionEnd", function(event) {
       var pairs = event.pairs;
-
-
       for (var i = 0, j = pairs.length; i !== j; ++i) {
         var pair = pairs[i];
-        //if collision passes object through floor rectangle it removes it from the world
         if (pair.bodyA === collider) {
-          this.setState({ score: this.state.score - 150 }, () => {
-            console.log(this.state.score);
-          });
+          decreaseScore();//<------ NEED TO UPDATE STATE WITH LOWER SCORE, CAN'T MAKE WORK!!!
+          //removes object after they stop touching the removal rectangle;
           World.remove(this.world, pair.bodyB);
           pair.bodyA.render.strokeStyle = "red";
         } else if (pair.bodyB === collider) {
           pair.bodyA.render.strokeStyle = "red";
         }
-      }
-    });
+      }}
+    );
   };
 
   addObject = () => {
@@ -165,9 +168,11 @@ class Main extends Component {
     });
   };
 
-  // decreaseScore = () => {
-  //   this.setState({ score: this.state.score - 150 });
-  // };
+  decreaseScore = () => {
+    this.setState({ score: this.state.score - 150 }, () => {
+      console.log(this.state.score);
+    });
+  };
 
   render() {
     return (
