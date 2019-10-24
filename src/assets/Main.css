@@ -11,6 +11,14 @@
       width: 100vw;
 }
 
+#userScore {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Noto Sans',
+    sans-serif;
+    color: #ffffff;
+}
+
 .main_component {
     display: inline-block
 }
