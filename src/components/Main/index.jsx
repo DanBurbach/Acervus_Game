@@ -9,7 +9,6 @@ import Polygon from './polygon'
 
 import "./../../assets/Main.css";
 
-
 class Main extends Component {
   constructor(props) {
     super(props);
@@ -84,19 +83,17 @@ class Main extends Component {
     ]);
   };
   
-  gameBodiesRemover = (score) => {
-    this.setState({
-      newscore : true
-    })
-
+  gameBodiesRemover = () => {
+    let decreaseScore = this.decreaseScore.bind(this);
     const setState = this.setState.bind(this);
-    let thescore = this.state.score;
-    console.log(this.state.score);
+    const newscore = this.state.newscore;
+
+    let scoreChanger = function(){
+      setState({ newscore: true });
+    };
 
     let lowerScore = function() {
-      setState({ score: (thescore - 150) }, () => {
-        console.log(thescore);
-      });
+      setState({ newscore: false });
     };
 
     //deletion boundary rectangle
@@ -117,6 +114,9 @@ class Main extends Component {
         var pair = pairs[i];
         if (pair.bodyA === collider) {
           pair.bodyB.render.strokeStyle = "green";
+          console.log('touching: ' + newscore);
+          scoreChanger();
+          decreaseScore();
         } else if (pair.bodyB === collider) {
           pair.bodyA.render.strokeStyle = "green";
         }
@@ -132,17 +132,12 @@ class Main extends Component {
           World.remove(this.world, pair.bodyB);          
           pair.bodyA.render.strokeStyle = "red";
           lowerScore();
+          console.log('touched, now deleted: ' + newscore);
         } else if (pair.bodyB === collider) {
           pair.bodyA.render.strokeStyle = "red";
         }
       }}
     );
-    this.setState({ score: this.state.score - 150 }, () => {
-      console.log(this.state.score);
-    });
-    this.setState({
-      newscore: false
-    });
   };
 
   addObject = () => {
@@ -181,9 +176,13 @@ class Main extends Component {
   };
 
   decreaseScore = () => {
-    this.setState({ score: this.state.score - 150 }, () => {
-      console.log(this.state.score);
-    });
+    if (this.state.newscore === true) {
+      this.setState({ score: this.state.score - 150 }, () => {
+        console.log(this.state.score);
+      });
+    } else {
+        console.log("status of newscore: " + this.state.newscore);
+    }
   };
 
   render() {
