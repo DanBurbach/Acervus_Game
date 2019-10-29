@@ -1,7 +1,5 @@
 # Acervus Game 
 
-#### (Built in React.js with [Create React App](https://github.com/facebook/create-react-app))
-
 PROJECT IS NOT COMPLETE, EVERYTHING WORKS EXCEPT GAME WIN SYSTEM
 
 [![Netlify Status]()
@@ -41,7 +39,8 @@ are removed from game and points are deducted from main score.
 
 ### __Technologies Used__
 
-  Matter.js, React.js, Javascript, CSS3, HTML, and jQuery
+  Matter.js, React.js, Javascript, CSS3, HTML, jQuery, and [Create React App](https://github.com/facebook/create-react-app)
+  
 
 ## __Future Development__
 
