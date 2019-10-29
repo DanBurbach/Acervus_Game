@@ -13,10 +13,9 @@ PROJECT IS NOT COMPLETE, EVERYTHING WORKS EXCEPT GAME WIN SYSTEM
 ## __Description__
 
 ```
-Using Matter.js library to build a physics game. Buttons generate 
-randomly sized circles, polygons, triangles, or random objects. Point 
-of game is to balance as many objects on the platform without 
-the objects falling. Each object creates points, dropped objects 
+Using Matter.js library to build a physics game. Buttons generate randomly sized circles, 
+polygons, triangles, or random objects. Point of game is to balance as many objects on 
+the platform without the objects falling. Each object creates points, dropped objects 
 are removed from game and points are deducted from main score.
 ```
 
