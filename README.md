@@ -1,4 +1,6 @@
-# Acervus Game (Built in React.js with [Create React App](https://github.com/facebook/create-react-app))
+# Acervus Game 
+
+## (Built in React.js with [Create React App](https://github.com/facebook/create-react-app))
 
 PROJECT IS NOT COMPLETE, EVERYTHING WORKS EXCEPT GAME WIN SYSTEM
 
