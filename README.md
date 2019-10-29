@@ -4,7 +4,7 @@ PROJECT IS NOT COMPLETE, EVERYTHING WORKS EXCEPT GAME WIN SYSTEM
 
 [![Netlify Status]()
 
-![Main LandingPage]()
+![Main LandingPage](https://github.com/DanBurbach/Acervus_Game/blob/master/src/assets/Acervus_Game_Splash.png?raw=true)
 
 ### __Created by Dan Burbach__
 #### __October 2019__
