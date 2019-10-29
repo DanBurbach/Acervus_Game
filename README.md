@@ -2,7 +2,7 @@
 
 PROJECT IS NOT COMPLETE, EVERYTHING WORKS EXCEPT GAME WIN SYSTEM
 
-[![Netlify Status]()
+[![Netlify Status](https://api.netlify.com/api/v1/badges/aae4eba4-6e6f-432f-aeec-41db49cdfd8a/deploy-status)](https://app.netlify.com/sites/practical-jackson-28fb60/deploys)
 
 ![Main LandingPage](https://github.com/DanBurbach/Acervus_Game/blob/master/src/assets/Acervus_Game_Splash.png?raw=true)
 
@@ -33,9 +33,9 @@ are removed from game and points are deducted from main score.
 
   * Enjoy!
   
-  * OR click here [Netlify where it's hosted]()
+  * OR click here [Netlify where it's hosted](https://practical-jackson-28fb60.netlify.com/)
   
-  AKA... 
+  AKA... https://practical-jackson-28fb60.netlify.com/
 
 ### __Technologies Used__
 
