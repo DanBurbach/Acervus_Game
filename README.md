@@ -1,6 +1,6 @@
 # Acervus Game 
 
-PROJECT IS NOT COMPLETE, EVERYTHING WORKS EXCEPT GAME WIN SYSTEM
+PROJECT IS NOT COMPLETE, while playable it is still in Alpha testing. Enjoy, but stay tuned.
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/aae4eba4-6e6f-432f-aeec-41db49cdfd8a/deploy-status)](https://app.netlify.com/sites/practical-jackson-28fb60/deploys)
 
@@ -46,7 +46,8 @@ are removed from game and points are deducted from main score.
 
   - [ ] Further CSS styling
   - [ ] Level selector
-  - [ ] Point system for losing and winning a game
+  - [ ] Point system for losing and winning a game finished
+  - [ ] Objects have more refined physics
 
 ### __Version__
 
