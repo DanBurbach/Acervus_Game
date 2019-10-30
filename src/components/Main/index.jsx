@@ -185,6 +185,16 @@ class Main extends Component {
     }
   };
 
+  gameEnder = () => {
+    if ((this.state.score === 1000)&&(this.state.engine.world.bodies >=27)){
+      console.log('winner!');
+    } else if ((this.state.score === -1000)&&(this.state.engine.world.bodies >= 30)){
+      console.log('lose game!');
+      
+    }
+  }
+
+
   render() {
 
     return (
