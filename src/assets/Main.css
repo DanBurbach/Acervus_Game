@@ -20,7 +20,13 @@
 }
 
 .main_component {
-    display: inline-block
+    display: inline-block;
+    padding: 0.75em;
+}
+
+#canvas {
+    height: auto;
+    width: 70vw;
 }
 
 .add-circle {
