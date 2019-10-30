@@ -5,7 +5,7 @@ export default function Circle() {
   let y = 30;
   let r = Common.random(5, 40);
   this.body = Matter.Bodies.circle(x, y, r, {
-    friction: 0.1,
+    friction: 0.2,
     restitution: 0.9
   });
   return this.body;
