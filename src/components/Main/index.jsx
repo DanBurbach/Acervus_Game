@@ -25,6 +25,7 @@ class Main extends Component {
     this.gameContainer = this.gameContainer.bind(this);
     this.gameBodiesRemover = this.gameBodiesRemover.bind(this);
     this.decreaseScore = this.decreaseScore.bind(this);
+    this.gameEnder = this.gameEnder.bind(this);
   }
 
   componentDidMount() {
@@ -59,6 +60,7 @@ class Main extends Component {
   gameSetUp = canvas => {
     this.gameContainer(canvas);
     this.gameBodiesRemover(canvas);
+    this.gameEnder(canvas);
     var dragConstraint = Drag(canvas, this.state.engine);
     Matter.World.add(this.state.engine.world, [dragConstraint]);
   };
@@ -186,11 +188,10 @@ class Main extends Component {
   };
 
   gameEnder = () => {
-    if ((this.state.score === 1000)&&(this.state.engine.world.bodies >=27)){
+    if (this.state.score === 500){
       console.log('winner!');
-    } else if ((this.state.score === -1000)&&(this.state.engine.world.bodies >= 30)){
+    } else if ((this.state.score === -500)||(this.state.engine.world.bodies >= 500)){
       console.log('lose game!');
-      
     }
   }
 
