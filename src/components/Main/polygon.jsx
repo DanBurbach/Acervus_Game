@@ -7,7 +7,7 @@ export default function polygon(x, y) {
     Common.random(3,7),
     Common.random(45),
     {
-      friction: 0.6,
+      friction: 0.9,
       restitution: 0.5
     }
   );
