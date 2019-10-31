@@ -26,6 +26,7 @@ class Main extends Component {
     this.gameBodiesRemover = this.gameBodiesRemover.bind(this);
     this.decreaseScore = this.decreaseScore.bind(this);
     this.gameEnder = this.gameEnder.bind(this);
+    this.anotherGame = this.anotherGame.bind(this);
   }
 
   componentDidMount() {
@@ -197,41 +198,53 @@ class Main extends Component {
     }
   }
 
+  anotherGame = () => {
+    window.location.reload();
+  }
+
 
   render() {
     return (
       <div className="main_container">
         <div className="main_component">
-          <canvas id="canvas" className="canvas"></canvas>
+          <div className="canvas_component">
+            <canvas id="canvas" className="canvas"></canvas>
+          </div>
         </div>
         <div className="main_component">
-          <ul>
-            <ol>
-              <div id='userScore'>
-                {this.gameEnder()}
-              </div>
-            </ol>
-            <ol>
-              <button className="add-circle" onClick={this.addCircle}>
-                Add Circle
-              </button>
-            </ol>
-            <ol>
-              <button className="add-rectangle" onClick={this.addRectangle}>
-                Add Rectangle
-              </button>
-            </ol>
-            <ol>
-              <button className="add-polygon" onClick={this.addPolygon}>
-                Add Polygon
-              </button>
-            </ol>
-            <ol>
-              <button className="add-object" onClick={this.addObject}>
-                Add Random Object
-              </button>
-            </ol>
-          </ul>
+          <div className="board_component">
+            <ul>
+              <ol>
+                <div className="title_component">Acervus Game</div>
+              </ol>
+              <ol>
+                <div id="userScore">{this.gameEnder()}</div>
+              </ol>
+              <ol>
+                <button className="add-circle" onClick={this.addCircle}>
+                  Add Circle
+                </button>
+              </ol>
+              <ol>
+                <button className="add-rectangle" onClick={this.addRectangle}>
+                  Add Rectangle
+                </button>
+              </ol>
+              <ol>
+                <button className="add-polygon" onClick={this.addPolygon}>
+                  Add Polygon
+                </button>
+              </ol>
+              <ol>
+                <button className="add-object" onClick={this.addObject}>
+                  Add Random Object
+                </button>
+              </ol>
+              <ol>
+                <button className="another_game" onClick={this.anotherGame}>Restart Game</button>
+              </ol>
+            </ul>
+          </div>
         </div>
       </div>
     );
