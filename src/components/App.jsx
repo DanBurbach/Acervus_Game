@@ -3,7 +3,8 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import * as ROUTES from "../constants/routes";
 
-import Main from "./Main";
+import Title from './Title';
+import Easy from "./Easy";
 import Error404 from "./Error404";
 
 import "./../assets/App.css";
@@ -19,7 +20,8 @@ class App extends Component {
       <div className="App">
         <BrowserRouter>
           <Switch>
-            <Route exact path={ROUTES.MAIN} component={Main} />
+            <Route exact path={ROUTES.TITLE} component={Title} />
+            <Route exact path={ROUTES.EASY} component={Easy} />
             <Route component={Error404} />
           </Switch>
         </BrowserRouter>
