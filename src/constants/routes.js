@@ -1,1 +1,2 @@
-export const MAIN = '/';
+export const TITLE = '/';
+export const EASY = '/Easy';
