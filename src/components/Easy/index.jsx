@@ -30,7 +30,7 @@ class Easy extends Component {
   }
 
   componentDidMount() {
-    if (window.confirm("You want to start game?")) {
+    if (window.confirm("You want to start an easy game?")) {
       this.setState({ play_game: true }, () => {
         console.log(this.state.play_game);
         console.log(this.state.score);
@@ -49,7 +49,7 @@ class Easy extends Component {
         Render.run(renderer);
       });
     } else {
-      return null;
+      this.anotherGame();
     }
   }
 
