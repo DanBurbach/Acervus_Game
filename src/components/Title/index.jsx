@@ -26,7 +26,7 @@ render() {
                 </ol>
                 <ol>
                     <div className="title_definition">
-                        A multitude of objects of the same kind, rising in a heap...
+                        Def: A multitude of objects of the same kind, rising in a heap...
                     </div>
                 </ol>
                 <ol>
