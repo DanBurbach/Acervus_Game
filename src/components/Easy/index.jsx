@@ -143,17 +143,6 @@ class Easy extends Component {
     );
   };
 
-  addObject = () => {
-    let rndomNumber = Math.floor(Math.random() * 3) + 1;
-    if (rndomNumber === 1) {
-      this.addCircle();
-    } else if (rndomNumber === 2) {
-      this.addPolygon();
-    } else if (rndomNumber === 3) {
-      this.addRectangle();
-    }
-  };
-
   addCircle = () => {
     let circle = new Circle();
     Matter.World.add(this.state.engine.world, [circle]);
@@ -233,11 +222,6 @@ class Easy extends Component {
               <ol>
                 <button className="add-polygon" onClick={this.addPolygon}>
                   Add Polygon
-                </button>
-              </ol>
-              <ol>
-                <button className="add-object" onClick={this.addObject}>
-                  Add Random Object
                 </button>
               </ol>
               <ol>
