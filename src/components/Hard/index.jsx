@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import Matter, { Engine, Render, World, Bodies, Events } from "matter-js";
 
-import createRender from "../Easy/createRender";
-import Drag from "../Easy/mouse";
-import Circle from "../Easy/circle";
-import Rectangle from "../Easy/rectangle";
-import Polygon from "../Easy/polygon";
+import createRender from "../Gameplay/createRender";
+import Drag from "../Gameplay/mouse";
+import Circle from "../Gameplay/circle";
+import Rectangle from "../Gameplay/rectangle";
+import Polygon from "../Gameplay/polygon";
 
 import "./../../assets/Easy.css";
 
