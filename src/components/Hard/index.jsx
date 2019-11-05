@@ -6,6 +6,7 @@ import Drag from "../Gameplay/mouse";
 import Circle from "../Gameplay/circle";
 import Rectangle from "../Gameplay/rectangle";
 import Polygon from "../Gameplay/polygon";
+import Trapezoid from "../Gameplay/trapezoid";
 
 import "./../../assets/Easy.css";
 
@@ -80,9 +81,9 @@ class Hard extends Component {
       //Bottom Left Floor
       Bodies.rectangle(0, 600, 600, 30, { isStatic: true }),
       //Platform
-      Bodies.rectangle(600, 500, 80, 15, { isStatic: true }),
+      Bodies.rectangle(600, 500, 80, 15, { isStatic: true, friction: 1 }),
       //Holder wall
-      Bodies.rectangle(300, 400, 15, 425, { isStatic: true })
+      Bodies.rectangle(300, 565, 15, 70, { isStatic: true })
     ]);
   };
 
@@ -144,25 +145,31 @@ class Hard extends Component {
   };
 
   addObject = () => {
-    let rndomNumber = Math.floor(Math.random() * 3) + 1;
+    let rndomNumber = Math.floor(Math.random() * 4) + 1;
     if (rndomNumber === 1) {
-        let circle = new Circle();
-        Matter.World.add(this.state.engine.world, [circle]);
-        this.setState({ score: this.state.score + 100 }, () => {
+      let circle = new Circle();
+      Matter.World.add(this.state.engine.world, [circle]);
+      this.setState({ score: this.state.score + 100 }, () => {
         console.log(this.state.score);
-        });
+      });
     } else if (rndomNumber === 2) {
-        let polygon = new Polygon(90, 20);
-        Matter.World.add(this.state.engine.world, [polygon]);
-        this.setState({ score: this.state.score + 50 }, () => {
+      let polygon = new Polygon(90, 20);
+      Matter.World.add(this.state.engine.world, [polygon]);
+      this.setState({ score: this.state.score + 50 }, () => {
         console.log(this.state.score);
-        });
+      });
     } else if (rndomNumber === 3) {
-        let rectangle = new Rectangle(90, 20);
-        Matter.World.add(this.state.engine.world, [rectangle]);
-        this.setState({ score: this.state.score + 20 }, () => {
+      let rectangle = new Rectangle(90, 20);
+      Matter.World.add(this.state.engine.world, [rectangle]);
+      this.setState({ score: this.state.score + 20 }, () => {
         console.log(this.state.score);
-        });
+      });
+    } else if (rndomNumber === 4) {
+      let trapezoid = new Trapezoid(90, 20);
+      Matter.World.add(this.state.engine.world, [trapezoid]);
+      this.setState({ score: this.state.score + 30 }, () => {
+        console.log(this.state.score);
+      });
     }
   };
 
@@ -177,10 +184,10 @@ class Hard extends Component {
   };
 
   gameEnder = () => {
-    if (this.state.score === 5000) {
+    if (this.state.score >= 5000) {
       return <div>You won!</div>;
     } else if (
-      this.state.score === -5000 ||
+      -5000 >= this.state.score ||
       this.state.engine.world.bodies >= 500
     ) {
       return <div>You lost!</div>;
