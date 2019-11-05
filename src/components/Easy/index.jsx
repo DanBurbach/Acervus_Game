@@ -80,18 +80,18 @@ class Easy extends Component {
       //Bottom Left Floor
       Bodies.rectangle(0, 600, 600, 30, { isStatic: true }),
       //Platform
-      Bodies.rectangle(600, 500, 80, 15, { isStatic: true }),
+      Bodies.rectangle(600, 500, 80, 15, { isStatic: true, friction: 1 }),
       //Holder wall
-      Bodies.rectangle(300, 400, 15, 425, { isStatic: true })
+      Bodies.rectangle(300, 565, 15, 70, { isStatic: true })
     ]);
   };
-  
+
   gameBodiesRemover = () => {
     let decreaseScore = this.decreaseScore.bind(this);
     const setState = this.setState.bind(this);
     const newscore = this.state.newscore;
 
-    let scoreChanger = function(){
+    let scoreChanger = function() {
       setState({ newscore: true });
     };
 
@@ -117,30 +117,30 @@ class Easy extends Component {
         var pair = pairs[i];
         if (pair.bodyA === collider) {
           pair.bodyB.render.strokeStyle = "green";
-          console.log('touching: ' + newscore);
+          console.log("touching: " + newscore);
           scoreChanger();
           decreaseScore();
         } else if (pair.bodyB === collider) {
           pair.bodyA.render.strokeStyle = "green";
         }
-      }}
-    );
-    
+      }
+    });
+
     Events.on(this.state.engine, "collisionEnd", function(event) {
       var pairs = event.pairs;
       for (var i = 0, j = pairs.length; i !== j; ++i) {
         var pair = pairs[i];
-        if (pair.bodyA === collider) { 
+        if (pair.bodyA === collider) {
           //removes object after they stop touching the removal rectangle;
-          World.remove(this.world, pair.bodyB);          
+          World.remove(this.world, pair.bodyB);
           pair.bodyA.render.strokeStyle = "red";
           lowerScore();
-          console.log('touched, now deleted: ' + newscore);
+          console.log("touched, now deleted: " + newscore);
         } else if (pair.bodyB === collider) {
           pair.bodyA.render.strokeStyle = "red";
         }
-      }}
-    );
+      }
+    });
   };
 
   addCircle = () => {
@@ -173,24 +173,26 @@ class Easy extends Component {
         console.log(this.state.score);
       });
     } else {
-        console.log("status of newscore: " + this.state.newscore);
+      console.log("status of newscore: " + this.state.newscore);
     }
   };
 
   gameEnder = () => {
-    if (this.state.score === 5000){
-      return <div>You won!</div>
-    } else if ((this.state.score === -5000)||(this.state.engine.world.bodies >= 500)){
-      return <div>You lost!</div>
+    if (this.state.score >= 5000) {
+      return <div>You won!</div>;
+    } else if (
+      -5000 >= this.state.score ||
+      this.state.engine.world.bodies >= 500
+    ) {
+      return <div>You lost!</div>;
     } else {
-      return <div>Score: {this.state.score} </div>
+      return <div>Score: {this.state.score} </div>;
     }
-  }
+  };
 
   anotherGame = () => {
-    this.props.history.push('/');
-  }
-
+    this.props.history.push("/");
+  };
 
   render() {
     return (
@@ -225,7 +227,9 @@ class Easy extends Component {
                 </button>
               </ol>
               <ol>
-                <button className="another_game" onClick={this.anotherGame}>Quit</button>
+                <button className="another_game" onClick={this.anotherGame}>
+                  Quit
+                </button>
               </ol>
             </ul>
           </div>
