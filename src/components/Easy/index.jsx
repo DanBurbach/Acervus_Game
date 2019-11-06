@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Matter, {Engine, Render, World, Bodies, Events} from "matter-js";
+import Modal from "react-modal";
 
 import createRender from '../Gameplay/createRender';
 import Drag from '../Gameplay/mouse';
@@ -8,6 +9,7 @@ import Rectangle from '../Gameplay/rectangle';
 import Polygon from '../Gameplay/polygon'
 
 import "./../../assets/Easy.css";
+import "./../../assets/gameEnd.css";
 
 class Easy extends Component {
   constructor(props) {
@@ -18,7 +20,9 @@ class Easy extends Component {
       engine: Matter.Engine.create(),
       score: 0,
       play_game: false,
-      newscore: false
+      newscore: false,
+      winOpen: false,
+      loseOpen: false
     };
     this.canvasSetUp = this.canvasSetUp.bind(this);
     this.gameSetUp = this.gameSetUp.bind(this);
@@ -27,6 +31,8 @@ class Easy extends Component {
     this.decreaseScore = this.decreaseScore.bind(this);
     this.gameEnder = this.gameEnder.bind(this);
     this.anotherGame = this.anotherGame.bind(this);
+    // this.showWin = this.showWin.bind(this);
+    // this.showLose = this.showLose.bind(this);
   }
 
   componentDidMount() {
@@ -61,7 +67,6 @@ class Easy extends Component {
   gameSetUp = canvas => {
     this.gameContainer(canvas);
     this.gameBodiesRemover(canvas);
-    // this.gameEnder(canvas);
     var dragConstraint = Drag(canvas, this.state.engine);
     Matter.World.add(this.state.engine.world, [dragConstraint]);
   };
@@ -143,7 +148,8 @@ class Easy extends Component {
     });
   };
 
-  addCircle = () => {
+  addCircle = event => {
+    event.preventDefault();
     let circle = new Circle();
     Matter.World.add(this.state.engine.world, [circle]);
     this.setState({ score: this.state.score + 100 }, () => {
@@ -151,7 +157,8 @@ class Easy extends Component {
     });
   };
 
-  addRectangle = () => {
+  addRectangle = event => {
+    event.preventDefault();
     let rectangle = new Rectangle(90, 20);
     Matter.World.add(this.state.engine.world, [rectangle]);
     this.setState({ score: this.state.score + 20 }, () => {
@@ -159,7 +166,8 @@ class Easy extends Component {
     });
   };
 
-  addPolygon = () => {
+  addPolygon = event => {
+    event.preventDefault();
     let polygon = new Polygon(90, 20);
     Matter.World.add(this.state.engine.world, [polygon]);
     this.setState({ score: this.state.score + 50 }, () => {
@@ -172,19 +180,28 @@ class Easy extends Component {
       this.setState({ score: this.state.score - 150 }, () => {
         console.log(this.state.score);
       });
+      this.gameEnder();
     } else {
       console.log("status of newscore: " + this.state.newscore);
     }
   };
 
   gameEnder = () => {
-    if (this.state.score >= 5000) {
-      return <div>You won!</div>;
+    if (this.state.score >= 500) {
+      this.setState({
+        winOpen: true
+      });
+      // this.showWin();
+      // return <div>You won!</div>
     } else if (
-      -5000 >= this.state.score ||
+      -500 >= this.state.score ||
       this.state.engine.world.bodies >= 500
     ) {
-      return <div>You lost!</div>;
+      this.setState({
+        loseOpen: true
+      });
+      // this.showLose();
+      // return <div>You lost!</div>;
     } else {
       return <div>Score: {this.state.score} </div>;
     }
@@ -194,9 +211,37 @@ class Easy extends Component {
     this.props.history.push("/");
   };
 
+  // showWin = () => {
+  //   this.setState({
+  //     winOpen: true
+  //   });
+  // }
+
+  // showLose = () => {
+  //   this.setState({
+  //     loseOpen: true
+  //   });
+  // }
+
   render() {
     return (
       <div className="easy_container">
+        <Modal
+          className="Modal_win"
+          isOpen={this.state.winOpen}
+          ariaHideApp={false}
+        >
+          <div className="endgamemodal_win">You Won!</div>
+          <button onClick={this.anotherGame}>End Game</button>
+        </Modal>
+        <Modal
+          className="Modal_lose"
+          isOpen={this.state.loseOpen}
+          ariaHideApp={false}
+        >
+          <div className="endgamemodal_lose">You Lost!</div>
+          <button onClick={this.anotherGame}>End Game</button>
+        </Modal>
         <div className="easy_component">
           <div className="canvas_component">
             <canvas id="canvas" className="canvas"></canvas>
@@ -209,7 +254,7 @@ class Easy extends Component {
                 <div className="title_component">Acervus Game</div>
               </ol>
               <ol>
-                <div id="userScore">{this.gameEnder()}</div>
+                <div id="userScore">Score: {this.state.score}</div>
               </ol>
               <ol>
                 <button className="add-circle" onClick={this.addCircle}>
