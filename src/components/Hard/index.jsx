@@ -19,7 +19,9 @@ class Hard extends Component {
       engine: Matter.Engine.create(),
       score: 0,
       play_game: false,
-      newscore: false
+      newscore: false,
+      winOpen: false,
+      loseOpen: false
     };
     this.canvasSetUp = this.canvasSetUp.bind(this);
     this.gameSetUp = this.gameSetUp.bind(this);
