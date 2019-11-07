@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Matter, { Engine, Render, World, Bodies, Events } from "matter-js";
+import ReactModal from "react-modal";
+
 
 import createRender from "../Gameplay/createRender";
 import Drag from "../Gameplay/mouse";
@@ -9,6 +11,7 @@ import Polygon from "../Gameplay/polygon";
 import Trapezoid from "../Gameplay/trapezoid";
 
 import "./../../assets/Easy.css";
+import "./../../assets/gameEnd.css";
 
 class Hard extends Component {
   constructor(props) {
@@ -154,24 +157,28 @@ class Hard extends Component {
       this.setState({ score: this.state.score + 100 }, () => {
         console.log(this.state.score);
       });
+      this.gameEnder();
     } else if (rndomNumber === 2) {
       let polygon = new Polygon(90, 20);
       Matter.World.add(this.state.engine.world, [polygon]);
       this.setState({ score: this.state.score + 50 }, () => {
         console.log(this.state.score);
       });
+      this.gameEnder();
     } else if (rndomNumber === 3) {
       let rectangle = new Rectangle(90, 20);
       Matter.World.add(this.state.engine.world, [rectangle]);
       this.setState({ score: this.state.score + 20 }, () => {
         console.log(this.state.score);
       });
+      this.gameEnder();
     } else if (rndomNumber === 4) {
       let trapezoid = new Trapezoid(90, 20);
       Matter.World.add(this.state.engine.world, [trapezoid]);
       this.setState({ score: this.state.score + 30 }, () => {
         console.log(this.state.score);
       });
+      this.gameEnder();
     }
   };
 
@@ -186,12 +193,18 @@ class Hard extends Component {
   };
 
   gameEnder = () => {
-    if (this.state.score >= 5000) {
+    if (this.state.score >= 500) {
+      this.setState({
+        winOpen: true
+      })
       return <div>You won!</div>;
     } else if (
-      -5000 >= this.state.score ||
+      -500 >= this.state.score ||
       this.state.engine.world.bodies >= 500
     ) {
+      this.setState({
+        loseOpen: true
+      })
       return <div>You lost!</div>;
     } else {
       return <div>Score: {this.state.score} </div>;
@@ -205,6 +218,28 @@ class Hard extends Component {
   render() {
     return (
       <div className="easy_container">
+        <ReactModal
+          className="Modal_win"
+          isOpen={this.state.winOpen}
+          ariaHideApp={false}
+        >
+          <div className="userWin">You Won!</div>
+          <button className="another_game" onClick={this.anotherGame}>
+            End Game
+          </button>
+          <div className="userWin_back"></div>
+        </ReactModal>
+        <ReactModal
+          className="Modal_lose"
+          isOpen={this.state.loseOpen}
+          ariaHideApp={false}
+        >
+          <div className="userLose_back"></div>
+          <div className="userLose">You Lost!</div>
+          <button className="another_game" onClick={this.anotherGame}>
+            End Game
+          </button>
+        </ReactModal>
         <div className="easy_component">
           <div className="canvas_component">
             <canvas id="canvas" className="canvas"></canvas>
@@ -217,7 +252,7 @@ class Hard extends Component {
                 <div className="title_component">Acervus Game</div>
               </ol>
               <ol>
-                <div id="userScore">{this.gameEnder()}</div>
+                <div id="userScore">Score: {this.state.score}</div>
               </ol>
               <ol>
                 <button className="add-object" onClick={this.addObject}>
