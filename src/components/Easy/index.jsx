@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Matter, {Engine, Render, World, Bodies, Events} from "matter-js";
-import Modal from "react-modal";
+import ReactModal from "react-modal";
 
 import createRender from '../Gameplay/createRender';
 import Drag from '../Gameplay/mouse';
@@ -92,6 +92,7 @@ class Easy extends Component {
   };
 
   gameBodiesRemover = () => {
+    let gameEnder = this.gameEnder.bind(this);
     let decreaseScore = this.decreaseScore.bind(this);
     const setState = this.setState.bind(this);
     const newscore = this.state.newscore;
@@ -140,6 +141,7 @@ class Easy extends Component {
           World.remove(this.world, pair.bodyB);
           pair.bodyA.render.strokeStyle = "red";
           lowerScore();
+          gameEnder();
           console.log("touched, now deleted: " + newscore);
         } else if (pair.bodyB === collider) {
           pair.bodyA.render.strokeStyle = "red";
@@ -155,6 +157,7 @@ class Easy extends Component {
     this.setState({ score: this.state.score + 100 }, () => {
       console.log(this.state.score);
     });
+    this.gameEnder();
   };
 
   addRectangle = event => {
@@ -164,6 +167,7 @@ class Easy extends Component {
     this.setState({ score: this.state.score + 20 }, () => {
       console.log(this.state.score);
     });
+    this.gameEnder();
   };
 
   addPolygon = event => {
@@ -173,6 +177,7 @@ class Easy extends Component {
     this.setState({ score: this.state.score + 50 }, () => {
       console.log(this.state.score);
     });
+    this.gameEnder();
   };
 
   decreaseScore = () => {
@@ -180,7 +185,6 @@ class Easy extends Component {
       this.setState({ score: this.state.score - 150 }, () => {
         console.log(this.state.score);
       });
-      this.gameEnder();
     } else {
       console.log("status of newscore: " + this.state.newscore);
     }
@@ -190,18 +194,18 @@ class Easy extends Component {
     if (this.state.score >= 500) {
       this.setState({
         winOpen: true
-      });
+      })
       // this.showWin();
-      // return <div>You won!</div>
+      return <div>You won!</div>
     } else if (
       -500 >= this.state.score ||
       this.state.engine.world.bodies >= 500
     ) {
       this.setState({
         loseOpen: true
-      });
+      })
       // this.showLose();
-      // return <div>You lost!</div>;
+      return <div>You lost!</div>;
     } else {
       return <div>Score: {this.state.score} </div>;
     }
@@ -226,22 +230,28 @@ class Easy extends Component {
   render() {
     return (
       <div className="easy_container">
-        <Modal
+        <ReactModal
           className="Modal_win"
           isOpen={this.state.winOpen}
           ariaHideApp={false}
         >
-          <div className="endgamemodal_win">You Won!</div>
-          <button onClick={this.anotherGame}>End Game</button>
-        </Modal>
-        <Modal
+          <div className="userWin">You Won!</div>
+          <button className="another_game" onClick={this.anotherGame}>
+            End Game
+          </button>
+          <div className="userWin_back"></div>
+        </ReactModal>
+        <ReactModal
           className="Modal_lose"
           isOpen={this.state.loseOpen}
           ariaHideApp={false}
         >
-          <div className="endgamemodal_lose">You Lost!</div>
-          <button onClick={this.anotherGame}>End Game</button>
-        </Modal>
+          <div className="userLose_back"></div>
+          <div className="userLose">You Lost!</div>
+          <button className="another_game" onClick={this.anotherGame}>
+            End Game
+          </button>
+        </ReactModal>
         <div className="easy_component">
           <div className="canvas_component">
             <canvas id="canvas" className="canvas"></canvas>
