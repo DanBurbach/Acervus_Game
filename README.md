@@ -39,20 +39,23 @@ are removed from game and points are deducted from main score.
 
 ### __Technologies Used__
 
-  [Matter.js](https://brm.io/matter-js/): A 2D physics engine for the web
-  
   React.js, Javascript, CSS3, HTML, jQuery, and [Create React App](https://github.com/facebook/create-react-app)
 
+  [Matter.js](https://brm.io/matter-js/): A 2D physics engine for the web
+
+  [React-Modal](https://www.npmjs.com/package/react-modal): Accessible modal dialog component for React.JS
+
   [Press Start 2P - Google Font](https://fonts.google.com/specimen/Press+Start+2P): Press Start 2P is a bitmap font based on the font design from 1980s Namco arcade games.
+
   [VT323 - Google Font](https://fonts.google.com/specimen/VT323): This font was created from the glyphs of the DEC VT320 text terminal
 
 ## __Future Development__
 
-  - [ ] Further CSS styling
+  - [x] Further CSS styling
   - [x] Level selector
-  - [ ] More difficult levels
-  - [ ] Point system for losing and winning a game finished
-  - [ ] Objects have more refined physics
+  - [x] More difficult levels
+  - [x] Point system for losing and winning a game finished
+  - [x] Objects have more refined physics
 
 ### __Version__
 
