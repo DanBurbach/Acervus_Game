@@ -10,6 +10,7 @@ import Polygon from '../Gameplay/polygon'
 
 import "./../../assets/Easy.css";
 import "./../../assets/gameEnd.css";
+import "./../../assets/crt.css";
 
 class Easy extends Component {
   constructor(props) {
@@ -229,64 +230,70 @@ class Easy extends Component {
 
   render() {
     return (
-      <div className="easy_container">
-        <ReactModal
-          className="Modal_win"
-          isOpen={this.state.winOpen}
-          ariaHideApp={false}
-        >
-          <div className="userWin">You Won!</div>
-          <button className="another_game" onClick={this.anotherGame}>
-            End Game
-          </button>
-          <div className="userWin_back"></div>
-        </ReactModal>
-        <ReactModal
-          className="Modal_lose"
-          isOpen={this.state.loseOpen}
-          ariaHideApp={false}
-        >
-          <div className="userLose_back"></div>
-          <div className="userLose">You Lost!</div>
-          <button className="another_game" onClick={this.anotherGame}>
-            End Game
-          </button>
-        </ReactModal>
-        <div className="easy_component">
-          <div className="canvas_component">
-            <canvas id="canvas" className="canvas"></canvas>
+      <div className='crt'>
+        <div className="easy_container">
+          <ReactModal
+            className="Modal_win"
+            isOpen={this.state.winOpen}
+            ariaHideApp={false}
+          >
+            <div className='crt'>
+              <div className="userWin">You Won!</div>
+              <button className="another_game" onClick={this.anotherGame}>
+                End Game
+              </button>
+              <div className="userWin_back"></div>
+            </div>
+          </ReactModal>
+          <ReactModal
+            className="Modal_lose"
+            isOpen={this.state.loseOpen}
+            ariaHideApp={false}
+          >
+            <div className='crt'>
+              <div className="userLose_back"></div>
+              <div className="userLose">You Lost!</div>
+              <button className="another_game" onClick={this.anotherGame}>
+                End Game
+              </button>
+            </div>
+          </ReactModal>
+          <div className="easy_component">
+            <div className="canvas_component">
+              <canvas id="canvas" className="canvas"></canvas>
+            </div>
           </div>
-        </div>
-        <div className="easy_component">
-          <div className="board_component">
-            <ul>
-              <ol>
-                <div className="title_component">Acervus Game</div>
-              </ol>
-              <ol>
-                <div id="userScore">Score: {this.state.score}</div>
-              </ol>
-              <ol>
-                <button className="add-circle" onClick={this.addCircle}>
-                  Add Circle
-                </button>
-              </ol>
-              <ol>
-                <button className="add-rectangle" onClick={this.addRectangle}>
-                  Add Rectangle
-                </button>
-              </ol>
-              <ol>
-                <button className="add-polygon" onClick={this.addPolygon}>
-                  Add Polygon
-                </button>
-              </ol>
-              <ol>
-                <button className="another_game" onClick={this.anotherGame}>
-                  Quit
-                </button>
-              </ol>
-            </ul>
+          <div className="easy_component">
+            <div className="board_component">
+              <ul>
+                <ol>
+                  <div className="title_component">Acervus Game</div>
+                </ol>
+                <ol>
+                  <div id="userScore">Score: {this.state.score}</div>
+                </ol>
+                <ol>
+                  <button className="add-circle" onClick={this.addCircle}>
+                    Add Circle
+                  </button>
+                </ol>
+                <ol>
+                  <button className="add-rectangle" onClick={this.addRectangle}>
+                    Add Rectangle
+                  </button>
+                </ol>
+                <ol>
+                  <button className="add-polygon" onClick={this.addPolygon}>
+                    Add Polygon
+                  </button>
+                </ol>
+                <ol>
+                  <button className="another_game" onClick={this.anotherGame}>
+                    Quit
+                  </button>
+                </ol>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
