@@ -9,19 +9,24 @@ class Title extends Component {
     this.state = {};
     this.easyGame = this.easyGame.bind(this);
     this.hardGame = this.hardGame.bind(this);
+    this.impossibleGame = this.impossibleGame.bind(this);
   }
 
   easyGame = () =>{
-      this.props.history.push('/Easy');
+      this.props.history.push('./Easy');
   }
 
   hardGame = () => {
       this.props.history.push('./Hard');
   }
 
+  impossibleGame = () => {
+      this.props.history.push('./Impossible')
+  }
+
   render() {
       return (
-        <div className='crt'>
+        <div className="crt">
           <div className="title_main_container">
             <ul>
               <ol>
@@ -29,7 +34,8 @@ class Title extends Component {
               </ol>
               <ol>
                 <div className="title_definition">
-                  Def: A multitude of objects of the same kind, rising in a heap...
+                  Def: A multitude of objects of the same kind, rising in a
+                  heap...
                 </div>
               </ol>
               <ol>
@@ -40,6 +46,13 @@ class Title extends Component {
               <ol>
                 <button className="title_hard_game" onClick={this.hardGame}>
                   Hard Game
+                </button>
+              </ol>
+              <ol>
+                <button className="title_impossible_game" 
+                // onClick={this.impossibleGame}
+                >
+                  Impossible Game
                 </button>
               </ol>
             </ul>
