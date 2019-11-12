@@ -37,7 +37,7 @@ class Hard extends Component {
   }
 
   componentDidMount() {
-    if (window.confirm("You want to start an easy game?")) {
+    if (window.confirm("You want to start a hard game?")) {
       this.setState({ play_game: true }, () => {
         console.log(this.state.play_game);
         console.log(this.state.score);
@@ -87,13 +87,14 @@ class Hard extends Component {
       //Bottom Left Floor
       Bodies.rectangle(0, 600, 600, 30, { isStatic: true }),
       //Platform
-      Bodies.rectangle(600, 500, 80, 15, { isStatic: true, friction: 1 }),
+      Bodies.rectangle(600, 500, 100, 15, { isStatic: true, friction: 1, restitution: 0.2 }),
       //Holder wall
       Bodies.rectangle(300, 565, 15, 70, { isStatic: true })
     ]);
   };
 
   gameBodiesRemover = () => {
+    let gameEnder = this.gameEnder.bind(this);
     let decreaseScore = this.decreaseScore.bind(this);
     const setState = this.setState.bind(this);
     const newscore = this.state.newscore;
@@ -142,6 +143,7 @@ class Hard extends Component {
           World.remove(this.world, pair.bodyB);
           pair.bodyA.render.strokeStyle = "red";
           lowerScore();
+          gameEnder();
           console.log("touched, now deleted: " + newscore);
         } else if (pair.bodyB === collider) {
           pair.bodyA.render.strokeStyle = "red";
