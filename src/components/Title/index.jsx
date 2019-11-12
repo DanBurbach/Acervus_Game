@@ -52,7 +52,8 @@ class Title extends Component {
                 <button className="title_impossible_game" 
                 // onClick={this.impossibleGame}
                 >
-                  Impossible Game
+                  <div className='glitch'>
+                  Impossible Game</div>
                 </button>
               </ol>
             </ul>
