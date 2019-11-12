@@ -1,6 +1,6 @@
-import Matter, {Common} from "matter-js";
+import Matter, { Common } from "matter-js";
 
-export default function polygon(x, y) {
+export default function Rectangle(x, y) {
   this.body = Matter.Bodies.rectangle(
     90,
     50,

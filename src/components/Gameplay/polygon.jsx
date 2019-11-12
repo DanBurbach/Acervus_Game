@@ -1,6 +1,6 @@
 import Matter, { Common } from "matter-js";
 
-export default function polygon(x, y) {
+export default function Polygon(x, y) {
   this.body = Matter.Bodies.polygon(
     90,
     30,
