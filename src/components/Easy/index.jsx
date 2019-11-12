@@ -192,14 +192,14 @@ class Easy extends Component {
   };
 
   gameEnder = () => {
-    if (this.state.score >= 500) {
+    if (this.state.score >= 1000) {
       this.setState({
         winOpen: true
       })
       // this.showWin();
       return <div>You won!</div>
     } else if (
-      -500 >= this.state.score ||
+      -1000 >= this.state.score ||
       this.state.engine.world.bodies >= 500
     ) {
       this.setState({
