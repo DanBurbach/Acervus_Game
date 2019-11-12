@@ -86,7 +86,11 @@ class Easy extends Component {
       //Bottom Left Floor
       Bodies.rectangle(0, 600, 600, 30, { isStatic: true }),
       //Platform
-      Bodies.rectangle(600, 500, 80, 15, { isStatic: true, friction: 1 }),
+      Bodies.rectangle(600, 500, 150, 15, {
+        isStatic: true,
+        friction: 1,
+        restitution: 0.1
+      }),
       //Holder wall
       Bodies.rectangle(300, 565, 15, 70, { isStatic: true })
     ]);
@@ -196,7 +200,6 @@ class Easy extends Component {
       this.setState({
         winOpen: true
       })
-      // this.showWin();
       return <div>You won!</div>
     } else if (
       -1000 >= this.state.score ||
@@ -205,7 +208,6 @@ class Easy extends Component {
       this.setState({
         loseOpen: true
       })
-      // this.showLose();
       return <div>You lost!</div>;
     } else {
       return <div>Score: {this.state.score} </div>;
@@ -215,18 +217,6 @@ class Easy extends Component {
   anotherGame = () => {
     this.props.history.push("/");
   };
-
-  // showWin = () => {
-  //   this.setState({
-  //     winOpen: true
-  //   });
-  // }
-
-  // showLose = () => {
-  //   this.setState({
-  //     loseOpen: true
-  //   });
-  // }
 
   render() {
     return (
