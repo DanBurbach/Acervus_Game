@@ -13,8 +13,6 @@
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       grid-template-rows: repeat(5, 1fr);
-      /* grid-column-gap: 0px;
-      grid-row-gap: 0px; */
 }
 
 #userScore {
@@ -24,11 +22,12 @@
     cursive;
     color: #ffffff;
     padding-bottom: 1.5em;
+    width: 125%;
 }
 
 .easy_component {
     display: inline-block;
-    padding: 0.75em;
+    padding: 0.25em;
 }
 
 .title_component {
@@ -40,6 +39,7 @@
     line-height: 125%;
     padding-bottom: 3em;
     text-align: center;
+    width: 125%;
 }
 
 .canvas_component {
@@ -57,7 +57,7 @@
     border: 1px solid #EE3769;
     border-radius: 8px;
     height: 4em;
-    width: 14em;
+    width: 125%;
     padding: 0;
     outline: none;
     overflow: hidden;
@@ -98,7 +98,7 @@
     border: 1px solid #1e3fcf;
     border-radius: 8px;
     height: 4em;
-    width: 14em;
+    width: 125%;
     padding: 0;
     outline: none;
     overflow: hidden;
@@ -139,7 +139,7 @@
     border: 1px solid rgb(26, 145, 22);
     border-radius: 8px;
     height: 4em;
-    width: 14em;
+    width: 125%;
     padding: 0;
     outline: none;
     overflow: hidden;
@@ -180,7 +180,7 @@
     border: 1px solid rgb(170, 0, 192);
     border-radius: 8px;
     height: 4em;
-    width: 14em;
+    width: 125%;
     padding: 0;
     outline: none;
     overflow: hidden;
@@ -221,7 +221,7 @@
     border: 1px solid rgb(190, 0, 0);
     border-radius: 8px;
     height: 4em;
-    width: 14em;
+    width: 125%;
     padding: 0;
     outline: none;
     overflow: hidden;
