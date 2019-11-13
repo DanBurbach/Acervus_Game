@@ -136,16 +136,17 @@
 .title_impossible_game .glitch:before,
 .title_impossible_game .glitch:after {
     content: 'Impossible Game';
-    color: #ffa023;
+    color: #66EE66;
     position: absolute;
     text-align: center;
     top: 0;
+    opacity: 0.75;
     overflow: hidden;
     height: 4em;
     width: 18em;
     margin: 0.4em;
     text-decoration: none;
-    z-index: 1;
+    z-index: -1;
 }
 
 .title_impossible_game::before {
