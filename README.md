@@ -4,7 +4,7 @@ PROJECT IS NOT COMPLETE, while playable it is still in Alpha testing. Enjoy, but
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/aae4eba4-6e6f-432f-aeec-41db49cdfd8a/deploy-status)](https://app.netlify.com/sites/practical-jackson-28fb60/deploys)
 
-![Main LandingPage](https://github.com/DanBurbach/Acervus_Game/blob/master/src/assets/Acervus_Game_Splash.png?raw=true)
+![Main LandingPage](https://github.com/DanBurbach/Acervus_Game/blob/master/src/assets/README_Acervus_Splash.gif?raw=true)
 
 ### __Created by Dan Burbach__
 #### __October 2019__
@@ -48,6 +48,8 @@ are removed from game and points are deducted from main score.
   [Press Start 2P - Google Font](https://fonts.google.com/specimen/Press+Start+2P): Press Start 2P is a bitmap font based on the font design from 1980s Namco arcade games.
 
   [VT323 - Google Font](https://fonts.google.com/specimen/VT323): This font was created from the glyphs of the DEC VT320 text terminal
+
+  ![Acervus Gameplay](https://github.com/DanBurbach/Acervus_Game/blob/master/src/assets/README_Acervus_Gameplay.gif?raw=true)
 
 ## __Future Development__
 
