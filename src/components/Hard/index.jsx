@@ -85,11 +85,15 @@ class Hard extends Component {
       //Right Wall
       Bodies.rectangle(900, 0, 20, containerH, { isStatic: true }),
       //Bottom Left Floor
-      Bodies.rectangle(0, 600, 600, 30, { isStatic: true }),
+      Bodies.rectangle(0, 600, 400, 30, { isStatic: true }),
       //Platform
-      Bodies.rectangle(600, 500, 100, 15, { isStatic: true, friction: 1, restitution: 0.2 }),
+      Bodies.rectangle(600, 500, 100, 15, {
+        isStatic: true,
+        friction: 1,
+        restitution: 0.2
+      }),
       //Holder wall
-      Bodies.rectangle(300, 565, 15, 70, { isStatic: true })
+      Bodies.rectangle(200, 585, 15, 50, { isStatic: true })
     ]);
   };
 
@@ -196,7 +200,7 @@ class Hard extends Component {
   };
 
   gameEnder = () => {
-    if (this.state.score >= 2000) {
+    if (this.state.score >= 1000) {
       this.setState({
         winOpen: true
       })
@@ -220,7 +224,7 @@ class Hard extends Component {
 
   render() {
     return (
-      <div className='crt'>
+      <div className="crt">
         <div className="easy_container">
           <ReactModal
             className="Modal_win"
@@ -254,6 +258,9 @@ class Hard extends Component {
               <ul>
                 <ol>
                   <div className="title_component">Acervus Game</div>
+                </ol>
+                <ol>
+                  <div id="userScore">Win: Score 1000 Lose: Score -1000</div>
                 </ol>
                 <ol>
                   <div id="userScore">Score: {this.state.score}</div>
