@@ -50,7 +50,7 @@ class Title extends Component {
               </ol>
               <ol>
                 <button className="title_impossible_game" 
-                // onClick={this.impossibleGame}
+                onClick={this.impossibleGame}
                 >
                   <div className='glitch'>
                   Impossible Game</div>
