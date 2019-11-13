@@ -292,10 +292,7 @@ class Impossible extends Component {
                   <div className="title_component">Acervus Game</div>
                 </ol>
                 <ol>
-                  <div id='userScore'>
-                    Win: Score 1000
-                    Lose: Score -1000
-                  </div>
+                  <div id="userScore">Win: Score 1000 Lose: Score -1000</div>
                 </ol>
                 <ol>
                   <div id="userScore">Score: {this.state.score}</div>
@@ -306,7 +303,7 @@ class Impossible extends Component {
                   </button>
                 </ol>
                 <ol>
-                  <button className="another_game" onClick={this.anotherGame}>
+                  <button className="quit_game" onClick={this.anotherGame}>
                     Quit
                   </button>
                 </ol>

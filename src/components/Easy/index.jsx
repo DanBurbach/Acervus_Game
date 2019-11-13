@@ -289,7 +289,7 @@ class Easy extends Component {
                   </button>
                 </ol>
                 <ol>
-                  <button className="another_game" onClick={this.anotherGame}>
+                  <button className="quit_game" onClick={this.anotherGame}>
                     Quit
                   </button>
                 </ol>
