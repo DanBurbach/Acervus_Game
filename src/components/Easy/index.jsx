@@ -84,15 +84,27 @@ class Easy extends Component {
       //Right Wall
       Bodies.rectangle(900, 0, 20, containerH, { isStatic: true }),
       //Bottom Left Floor
-      Bodies.rectangle(0, 600, 600, 30, { isStatic: true }),
-      //Platform
+      Bodies.rectangle(0, 600, 400, 30, { isStatic: true }),
+      //Platform center bottom
       Bodies.rectangle(600, 500, 150, 15, {
         isStatic: true,
         friction: 1,
         restitution: 0.1
       }),
+      //Platform left top
+      Bodies.rectangle(450, 200, 100, 15, {
+        isStatic: true,
+        friction: 1,
+        restitution: 0.1
+      }),
+      //Platform right top
+      Bodies.rectangle(750, 200, 100, 15, {
+        isStatic: true,
+        friction: 1,
+        restitution: 0.1
+      }),
       //Holder wall
-      Bodies.rectangle(300, 565, 15, 70, { isStatic: true })
+      Bodies.rectangle(200, 585, 15, 50, { isStatic: true })
     ]);
   };
 
@@ -220,33 +232,29 @@ class Easy extends Component {
 
   render() {
     return (
-      <div className='crt'>
+      <div className="crt">
         <div className="easy_container">
           <ReactModal
             className="Modal_win"
             isOpen={this.state.winOpen}
             ariaHideApp={false}
           >
-            <div className='crt'>
-              <div className="userWin">You Won!</div>
-              <button className="another_game" onClick={this.anotherGame}>
-                End Game
-              </button>
-              <div className="userWin_back"></div>
-            </div>
+            <div className="userWin">You Won!</div>
+            <button className="another_game" onClick={this.anotherGame}>
+              End Game
+            </button>
+            <div className="userWin_back"></div>
           </ReactModal>
           <ReactModal
             className="Modal_lose"
             isOpen={this.state.loseOpen}
             ariaHideApp={false}
           >
-            <div className='crt'>
-              <div className="userLose_back"></div>
-              <div className="userLose">You Lost!</div>
-              <button className="another_game" onClick={this.anotherGame}>
-                End Game
-              </button>
-            </div>
+            <div className="userLose_back"></div>
+            <div className="userLose">You Lost!</div>
+            <button className="another_game" onClick={this.anotherGame}>
+              End Game
+            </button>
           </ReactModal>
           <div className="easy_component">
             <div className="canvas_component">
@@ -258,6 +266,9 @@ class Easy extends Component {
               <ul>
                 <ol>
                   <div className="title_component">Acervus Game</div>
+                </ol>
+                <ol>
+                  <div id="userScore">Win: Score 1000 Lose: Score -1000</div>
                 </ol>
                 <ol>
                   <div id="userScore">Score: {this.state.score}</div>
