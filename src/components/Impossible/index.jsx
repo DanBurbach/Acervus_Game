@@ -71,7 +71,6 @@ class Impossible extends Component {
     this.gameContainer(canvas);
     this.runnerPlatform(canvas);
     this.gameBodiesRemover(canvas);
-    // this.gameEnder(canvas);
     var dragConstraint = Drag(canvas, this.state.engine);
     Matter.World.add(this.state.engine.world, [dragConstraint]);
   };
@@ -88,39 +87,45 @@ class Impossible extends Component {
       //Right Wall
       Bodies.rectangle(900, 0, 20, containerH, { isStatic: true }),
       //Bottom Left Floor
-      Bodies.rectangle(0, 600, 600, 30, { isStatic: true }),
-      this.runnerPlatform,
+      Bodies.rectangle(0, 600, 400, 30, { isStatic: true }),
       //Holder wall
-      Bodies.rectangle(300, 565, 15, 70, { isStatic: true })
+      Bodies.rectangle(200, 585, 15, 50, { isStatic: true })
     ]);
   };
 
   runnerPlatform = () => {
     var runner = Runner.create();
+
     Runner.run(runner, this.state.engine);
-    let engine = this.state.engine;
-    let bodies = this.state.bodies;
+
     let counter = this.state.counter;
 
-      Bodies.rectangle(600, 500, 100, 15, {
-        isStatic: true,
-        friction: 1,
-        restitution: 0.2
-      })
-      counter = -1;
+    let body = Bodies.rectangle(600, 500, 120, 15, {
+      isStatic: true,
+      friction: 1,
+      restitution: 0.8,
+      render: {
+        fillStyle: "transparent",
+        strokeStyle: '#66EE66',
+        lineWidth: 1,
+      }
+    });
+      counter = -0.125;
 
-      Events.on(engine, "beforeUpdate", function(event) {
-        counter += 0.014;
+      World.add(this.state.engine.world, [body])
+
+      Events.on(this.state.engine, "beforeUpdate", function(event) {
+        counter += 0.005;
 
         if (counter < 0) {
           return;
         }
 
-        var px = 400 + 100 * Math.sin(counter);
+        var px = 550 + 200 * Math.sin(counter);
 
         // body is static so must manually update velocity for friction to work
-        Bodies.setVelocity(bodies, { x: px - bodies.position.x, y: 0 });
-        Bodies.setPosition(bodies, { x: px, y: bodies.position.y });
+        Matter.Body.setVelocity(body, { x: px - body.position.x, y: 0 });
+        Matter.Body.setPosition(body, { x: px, y: body.position.y });
       });
   };
 
@@ -227,7 +232,7 @@ class Impossible extends Component {
   };
 
   gameEnder = () => {
-    if (this.state.score >= 2000) {
+    if (this.state.score >= 1000) {
       this.setState({
         winOpen: true
       });
@@ -285,6 +290,12 @@ class Impossible extends Component {
               <ul>
                 <ol>
                   <div className="title_component">Acervus Game</div>
+                </ol>
+                <ol>
+                  <div id='userScore'>
+                    Win: Score 1000
+                    Lose: Score -1000
+                  </div>
                 </ol>
                 <ol>
                   <div id="userScore">Score: {this.state.score}</div>
