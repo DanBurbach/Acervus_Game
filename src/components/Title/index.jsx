@@ -26,37 +26,41 @@ class Title extends Component {
 
   render() {
       return (
-        <div className="crt">
-          <div className="title_main_container">
-            <ul>
-              <ol>
-                <h1>Acervus</h1>
-              </ol>
-              <ol>
-                <div className="title_definition">
-                  Def: A multitude of objects of the same kind, rising in a
-                  heap...
-                </div>
-              </ol>
-              <ol>
-                <button className="title_easy_game" onClick={this.easyGame}>
-                  Easy Game
-                </button>
-              </ol>
-              <ol>
-                <button className="title_hard_game" onClick={this.hardGame}>
-                  Hard Game
-                </button>
-              </ol>
-              <ol>
-                <button className="title_impossible_game" 
-                onClick={this.impossibleGame}
-                >
-                  <div className='glitch'>
-                  Impossible Game</div>
-                </button>
-              </ol>
-            </ul>
+        <div className="frame">
+          <div className="crt">
+            <div className="title_main_container">
+              <ul>
+                <ol>
+                  <h1>Acervus</h1>
+                </ol>
+                <ol>
+                  <div className="title_definition">
+                    Def: A multitude of objects of the same kind, rising in a
+                    heap...
+                  </div>
+                </ol>
+                <br/>
+                <br/>
+                <ol>
+                  <button className="title_easy_game" onClick={this.easyGame}>
+                    Easy Game
+                  </button>
+                </ol>
+                <ol>
+                  <button className="title_hard_game" onClick={this.hardGame}>
+                    Hard Game
+                  </button>
+                </ol>
+                <ol>
+                  <button
+                    className="title_impossible_game"
+                    onClick={this.impossibleGame}
+                  >
+                    <div className="glitch">Impossible Game</div>
+                  </button>
+                </ol>
+              </ul>
+            </div>
           </div>
         </div>
       );
