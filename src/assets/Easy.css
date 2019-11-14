@@ -110,7 +110,7 @@
     margin: 1em;
     text-decoration: none;
     cursor: pointer;
-    border: 1px solid #1e3fcf;
+    border: 1px solid #0051ff;
     border-radius: 8px;
     height: 4em;
     width: 125%;
@@ -119,7 +119,7 @@
     overflow: hidden;
     font-family: 'Press Start 2P',
     cursive;
-    color: #1e3fcf;
+    color: #0051ff;
     transition: color 0.3s 0.1s ease-out;
     text-align: center;
     line-height: 250%;
@@ -144,7 +144,7 @@
 }
 
 .add-rectangle:hover::before {
-    box-shadow: inset 0 0 0 10em #1e3fcf;
+    box-shadow: inset 0 0 0 10em #0051ff;
 }
 
 .add-polygon {
