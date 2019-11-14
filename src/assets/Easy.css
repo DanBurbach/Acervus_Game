@@ -1,19 +1,21 @@
 .easy_container {
-      background: #222;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      font-family: 'Press Start 2P',
-      cursive;
-      text-shadow: 1px 1px 2px #ffffff;
-      box-sizing: border-box;
-      padding: 1em;
-      text-align: center;
-      height: 90vh;
-      width: 93vw;
-      display: grid;
-      border-radius: 2em;
-      grid-template-columns: repeat(5, 1fr);
-      grid-template-rows: repeat(5, 1fr);
+    background: -webkit-radial-gradient(35px 35px, 90px 105px, #817F74 0%, #57564D 50%, #222 100%);
+    background: -moz-radial-gradient(35px 35px, 90px 105px, #817F74 0%, #57564D 50%, #222 100%);
+    background: -o-radial-gradient(35px 35px, 90px 105px, #817F74 0%, #57564D 50%, #222 100%);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Press Start 2P',
+    cursive;
+    text-shadow: 1px 1px 2px #ffffff;
+    box-sizing: border-box;
+    padding: 1em;
+    text-align: center;
+    height: 90vh;
+    width: 93vw;
+    display: grid;
+    border-radius: 2em;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
 }
 
 #userScore {
