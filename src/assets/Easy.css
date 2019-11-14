@@ -8,9 +8,10 @@
       box-sizing: border-box;
       padding: 1em;
       text-align: center;
-      height: 100vh;
-      width: 100vw;
+      height: 90vh;
+      width: 93vw;
       display: grid;
+      border-radius: 2em;
       grid-template-columns: repeat(5, 1fr);
       grid-template-rows: repeat(5, 1fr);
 }
@@ -23,6 +24,18 @@
     color: #ffffff;
     padding-bottom: 1.5em;
     width: 125%;
+}
+
+#userEndGameTitle {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Press Start 2P',
+    cursive;
+    color: #ffffff;
+    padding-top: 2em;
+    padding-bottom: 1.5em;
+    font-size: 4em;
+    text-align: center;
 }
 
 .easy_component {
