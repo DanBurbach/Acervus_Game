@@ -53,6 +53,7 @@ are removed from game and points are deducted from main score.
 
 ## __Future Development__
 
+  - [ ] Adapt styling to allow for mobile device use/view of content
   - [x] Further CSS styling
   - [x] Level selector
   - [x] More difficult levels
