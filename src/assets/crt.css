@@ -202,3 +202,44 @@
 .crt {
     animation: textShadow 1.6s infinite;
 }
+
+.frame {
+    background: #383838;
+    background-color: transparent;
+    border-radius: 2em;
+    border: 1rem solid;
+    border-bottom-color: #121212;
+    border-left-color: #252525;
+    border-right-color: #252525;
+    border-top-color: #575757;
+    box-shadow:
+        inset 0 0 18rem black,
+        inset 0 0 3rem black,
+        0 0 10rem black;
+    position: absolute;
+    top: 2%;
+    left: 2%;
+    width: 93%;
+    height: 90vh;
+    z-index: 100;
+}
+
+.gameEnd_frame {
+    background: #383838;
+    background-color: transparent;
+    border-radius: 2em;
+    border: 1rem solid;
+    border-bottom-color: #121212;
+    border-left-color: #252525;
+    border-right-color: #252525;
+    border-top-color: #575757;
+    box-shadow: inset 0 0 18rem black,
+    inset 0 0 3rem black,
+    0 0 10rem black;
+    position: absolute;
+    top: 2%;
+    left: 2%;
+    width: 93%;
+    height: 90vh;
+    z-index: 100;
+}
