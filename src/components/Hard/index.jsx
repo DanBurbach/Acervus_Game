@@ -224,58 +224,64 @@ class Hard extends Component {
 
   render() {
     return (
-      <div className="crt">
-        <div className="easy_container">
-          <ReactModal
-            className="Modal_win"
-            isOpen={this.state.winOpen}
-            ariaHideApp={false}
-          >
-            <div className="userWin">You Won!</div>
-            <button className="another_game" onClick={this.anotherGame}>
-              End Game
-            </button>
-            <div className="userWin_back"></div>
-          </ReactModal>
-          <ReactModal
-            className="Modal_lose"
-            isOpen={this.state.loseOpen}
-            ariaHideApp={false}
-          >
-            <div className="userLose_back"></div>
-            <div className="userLose">You Lost!</div>
-            <button className="another_game" onClick={this.anotherGame}>
-              End Game
-            </button>
-          </ReactModal>
-          <div className="easy_component">
-            <div className="canvas_component">
-              <canvas id="canvas" className="canvas"></canvas>
+      <div className="frame">
+        <div className="crt">
+          <div className="easy_container">
+            <ReactModal
+              className="Modal_win"
+              isOpen={this.state.winOpen}
+              ariaHideApp={false}
+            >
+              <div className="gameEnd_frame">
+              <div id="userEndGameTitle">You Won!</div>
+              <button className="another_game" onClick={this.anotherGame}>
+                End Game
+              </button>
+              <div className="userWin_back"></div>
+              </div>
+            </ReactModal>
+            <ReactModal
+              className="Modal_lose"
+              isOpen={this.state.loseOpen}
+              ariaHideApp={false}
+            >
+              <div className="gameEnd_frame">
+              <div className="userLose_back"></div>
+              <div id="userEndGameTitle">You Lost!</div>
+              <button className="another_game" onClick={this.anotherGame}>
+                End Game
+              </button>
+              </div>
+            </ReactModal>
+            <div className="easy_component">
+              <div className="canvas_component">
+                <canvas id="canvas" className="canvas"></canvas>
+              </div>
             </div>
-          </div>
-          <div className="easy_component">
-            <div className="board_component">
-              <ul>
-                <ol>
-                  <div className="title_component">Acervus Game</div>
-                </ol>
-                <ol>
-                  <div id="userScore">Win: Score 1000 Lose: Score -1000</div>
-                </ol>
-                <ol>
-                  <div id="userScore">Score: {this.state.score}</div>
-                </ol>
-                <ol>
-                  <button className="add-object" onClick={this.addObject}>
-                    Add Random Object
-                  </button>
-                </ol>
-                <ol>
-                  <button className="quit_game" onClick={this.anotherGame}>
-                    Quit
-                  </button>
-                </ol>
-              </ul>
+            <div className="easy_component">
+              <div className="board_component">
+                <ul>
+                  <ol>
+                    <div className="title_component">Acervus Game</div>
+                  </ol>
+                  <ol>
+                    <div id="userScore">Win: Score 1000 Lose: Score -1000</div>
+                  </ol>
+                  <ol>
+                    <div id="userScore">Score: {this.state.score}</div>
+                  </ol>
+                  <ol>
+                    <button className="add-object" onClick={this.addObject}>
+                      Add Random Object
+                    </button>
+                  </ol>
+                  <ol>
+                    <button className="quit_game" onClick={this.anotherGame}>
+                      Quit
+                    </button>
+                  </ol>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
