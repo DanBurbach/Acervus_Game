@@ -32,8 +32,6 @@ class Easy extends Component {
     this.decreaseScore = this.decreaseScore.bind(this);
     this.gameEnder = this.gameEnder.bind(this);
     this.anotherGame = this.anotherGame.bind(this);
-    // this.showWin = this.showWin.bind(this);
-    // this.showLose = this.showLose.bind(this);
   }
 
   componentDidMount() {
@@ -84,7 +82,7 @@ class Easy extends Component {
       //Right Wall
       Bodies.rectangle(900, 0, 20, containerH, { isStatic: true }),
       //Bottom Left Floor
-      Bodies.rectangle(0, 600, 400, 30, { isStatic: true }),
+      Bodies.rectangle(0, 600, 265, 30, { isStatic: true }),
       //Platform center bottom
       Bodies.rectangle(600, 500, 150, 15, {
         isStatic: true,
@@ -104,7 +102,7 @@ class Easy extends Component {
         restitution: 0.1
       }),
       //Holder wall
-      Bodies.rectangle(200, 585, 15, 50, { isStatic: true })
+      Bodies.rectangle(125, 585, 15, 50, { isStatic: true })
     ]);
   };
 
@@ -241,11 +239,13 @@ class Easy extends Component {
               ariaHideApp={false}
             >
               <div className="gameEnd_frame">
+                <div className="crt">
                 <div id="userEndGameTitle">You Won!</div>
                 <button className="another_game" onClick={this.anotherGame}>
                   End Game
                 </button>
                 <div className="userWin_back"></div>
+                </div>
               </div>
             </ReactModal>
             <ReactModal
@@ -254,11 +254,13 @@ class Easy extends Component {
               ariaHideApp={false}
             >
               <div className="gameEnd_frame">
+                <div className="crt">
                 <div id="userEndGameTitle">You Lost!</div>
                 <button className="another_game" onClick={this.anotherGame}>
                   End Game
                 </button>
                 <div className="userLose_back"></div>
+                </div>
               </div>
             </ReactModal>
             <div className="easy_component">
