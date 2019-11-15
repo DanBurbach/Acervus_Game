@@ -265,11 +265,13 @@ class Impossible extends Component {
               ariaHideApp={false}
             >
               <div className="gameEnd_frame">
-              <div id="userEndGameTitle">You Won!</div>
-              <button className="another_game" onClick={this.anotherGame}>
-                End Game
-              </button>
-              <div className="userWin_back"></div>
+                <div className="crt">
+                  <div id="userEndGameTitle">You Won!</div>
+                  <button className="another_game" onClick={this.anotherGame}>
+                    End Game
+                  </button>
+                  <div className="userWin_back"></div>
+                </div>
               </div>
             </ReactModal>
             <ReactModal
@@ -278,11 +280,13 @@ class Impossible extends Component {
               ariaHideApp={false}
             >
               <div className="gameEnd_frame">
-              <div className="userLose_back"></div>
-              <div id="userEndGameTitle">You Lost!</div>
-              <button className="another_game" onClick={this.anotherGame}>
-                End Game
-              </button>
+                <div className="crt">
+                  <div id="userEndGameTitle">You Lost!</div>
+                  <button className="another_game" onClick={this.anotherGame}>
+                    End Game
+                  </button>
+                  <div className="userLose_back"></div>
+                </div>
               </div>
             </ReactModal>
             <div className="easy_component">
