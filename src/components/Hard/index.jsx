@@ -85,15 +85,15 @@ class Hard extends Component {
       //Right Wall
       Bodies.rectangle(900, 0, 20, containerH, { isStatic: true }),
       //Bottom Left Floor
-      Bodies.rectangle(0, 600, 400, 30, { isStatic: true }),
+      Bodies.rectangle(0, 600, 265, 30, { isStatic: true }),
       //Platform
-      Bodies.rectangle(600, 500, 100, 15, {
+      Bodies.rectangle(600, 475, 200, 15, {
         isStatic: true,
         friction: 1,
         restitution: 0.2
       }),
       //Holder wall
-      Bodies.rectangle(200, 585, 15, 50, { isStatic: true })
+      Bodies.rectangle(125, 585, 15, 50, { isStatic: true })
     ]);
   };
 
@@ -233,11 +233,13 @@ class Hard extends Component {
               ariaHideApp={false}
             >
               <div className="gameEnd_frame">
-              <div id="userEndGameTitle">You Won!</div>
-              <button className="another_game" onClick={this.anotherGame}>
-                End Game
-              </button>
-              <div className="userWin_back"></div>
+                <div className="crt">
+                  <div id="userEndGameTitle">You Won!</div>
+                  <button className="another_game" onClick={this.anotherGame}>
+                    End Game
+                  </button>
+                  <div className="userWin_back"></div>
+                </div>
               </div>
             </ReactModal>
             <ReactModal
@@ -246,11 +248,13 @@ class Hard extends Component {
               ariaHideApp={false}
             >
               <div className="gameEnd_frame">
-              <div className="userLose_back"></div>
-              <div id="userEndGameTitle">You Lost!</div>
-              <button className="another_game" onClick={this.anotherGame}>
-                End Game
-              </button>
+                <div className="crt">
+                  <div id="userEndGameTitle">You Lost!</div>
+                  <button className="another_game" onClick={this.anotherGame}>
+                    End Game
+                  </button>
+                  <div className="userLose_back"></div>
+                </div>
               </div>
             </ReactModal>
             <div className="easy_component">
