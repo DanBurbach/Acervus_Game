@@ -4,7 +4,7 @@ PROJECT IS NOT COMPLETE, while playable it is still in Alpha testing. Enjoy, but
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/aae4eba4-6e6f-432f-aeec-41db49cdfd8a/deploy-status)](https://app.netlify.com/sites/practical-jackson-28fb60/deploys)
 
-![Main LandingPage](https://github.com/DanBurbach/Acervus_Game/blob/master/src/assets/README_Acervus_Splash.gif?raw=true)
+![Main LandingPage](https://github.com/DanBurbach/Acervus_Game/blob/master/src/assets/Stagnant%20readme%20splash%20image.png)
 
 ### __Created by Dan Burbach__
 #### __October 2019__
